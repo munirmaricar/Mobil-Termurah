@@ -1,15 +1,10 @@
-stages:
-  - test
-  - deploy
+test:
+  script:
+    - apt-get update -qy
+    - apt-get install -y python3-dev python3-pip
+    - pip3 install -r requirements.txt
+    - python3 manage.py test
 
-UnitTest:
-  image: python:3.6
-  stage: test
-  before_script:
-    - pip install -r requirements.txt
-    - python manage.py makemigrations
-    - python manage.py migrate
-    - python manage.py collectstatic --no-input
 publish:
   type: deploy
   script:
