@@ -1,0 +1,21 @@
+stages:
+  - test
+  - deploy
+
+UnitTest:
+  image: python:3.6
+  stage: test
+  before_script:
+    - pip install -r requirements.txt
+    - python manage.py makemigrations
+    - python manage.py migrate
+    - python manage.py collectstatic --no-input
+publish:
+  type: deploy
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=ppwstarter --api-key=$HEROKU_API_KEY
+  only:
+    - master
