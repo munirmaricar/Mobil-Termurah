@@ -2,7 +2,7 @@ stages:
   - test
   - deploy
 
-UnitTest:
+test:
   image: python:3.6
   stage: test
   before_script:
