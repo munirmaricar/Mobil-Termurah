@@ -46,8 +46,7 @@ Live di http://ppwstarter.herokuapp.com
 ### Using this starterpack
 
 Everything's configured so you can start writing your HTML/CSS/models ASAP.<br/>
-**HTML**<br/>Go to **tugas/templates/pages/index.html** and start implementing your website<br/>**CSS**<br/>Go to **static/css/main.css** and start writing your css
-**Images**<br/>Go to **static/assets** and start placing your own image<br/>Refer to your image in the HTML by using<br/>`<img src="{% static 'assets/your_image_name.jpg' %}">`<br/>**Javascript**<br/>Go to static/js and start writing your own javascript
+**HTML**<br/>Go to **tugas/templates/pages/index.html** and start implementing your website<br/>**CSS**<br/>Go to **static/css/main.css** and start writing your css<br/>**Images**<br/>Go to **static/assets** and start placing your own image<br/>Refer to your image in the HTML by using<br/>`<img src="{% static 'assets/your_image_name.jpg' %}">`<br/>**Javascript**<br/>Go to static/js and start writing your own javascript
 
 ### Deploying
 
