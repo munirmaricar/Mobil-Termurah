@@ -58,7 +58,8 @@ This starterpack is already preconfigured to work on PPW Fasilkom UI pipeline, w
 2. **Making a Gitlab repo**<br/>Go to gitlab.com and new project, and create a new project<br/>Click your newly created repo and go to settings - CI/CD<br/>Search for **Variables** and click **expand**<br/>Key = 'HEROKU_API_KEY' (without the quotation)<br/>Value = the API KEY Value in step 1 that you copied from Heroku
 
 3. **Small config in your project**<br/>Edit the **gitlab-ci.yml** file in your project, change this line<br/>`--app=ppwstarter`<br/>to<br/>`--app=your_heroku_app_name_in_step_1`<br/>
-4. **Deploying**<br/>1. navigate to your directory using terminal
+4. **Deploying**<br/>
+   1. navigate to your directory using terminal
    2. `git remote rename origin upstream`
    3. `git remote add origin URL_TO_GITLAB_REPO`
    4. `git add .`
