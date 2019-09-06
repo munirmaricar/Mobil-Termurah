@@ -2,7 +2,7 @@
 
 ## About This Pack
 
-**This Is** <br/> A blank starting project for your web development course in FASILKOM UI. (_note the word blank, you still have to configure models, forms, etc by yourself if you intend to use so,_)
+**This Is** <br/> A blank, preconfigured starting project for your web development course in FASILKOM UI for seamless integration with Heroku, and effortless staticfiles management. (_note the word blank, you still have to configure models, forms, etc by yourself if you intend to use so,_)
 
 **This is NOT**<br/> This is not a Django Template, this starterpack **does not** contain premade models, forms, etc as mentioned above.
 
