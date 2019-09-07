@@ -25,7 +25,7 @@ Live di http://ppwstarter.herokuapp.com
 2. Navigate to the cloned project
 3. Create a new python environment<br/>`python3 -m venv Env`
 4. Activate the environment<br/>**Mac / Ubuntu**<br/>`source Env/bin/activate`<br/>**Windows**<br/>`Env/Scripts/activate`
-5. Install the dependencies<br/>`pip3 install -r requirements.txt`
+5. Install the dependencies<br/> Navigate back to your root project directory, where requirements.txt is placed<br/>`pip3 install -r requirements.txt`
 6. Migrate the Django project<br/>`python3 manage.py makemigrations`<br/>`python3 manage.py migrate`
 7. Run the project<br/>`python3 manage.py runserver`
 8. Go to your browser and type in<br/>`http://localhost:8000/`<br/>
