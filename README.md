@@ -1,6 +1,7 @@
 # PPW Starterpack
 
-Live di http://ppwstarter.herokuapp.com
+Live di http://ppwstarter.herokuapp.com<br/>
+[![pipeline status](https://gitlab.com/jonathanfilbert/django-ppw-starter/badges/master/pipeline.svg)](https://gitlab.com/jonathanfilbert/django-ppw-starter/commits/master)
 
 ## About This Pack
 
