@@ -41,6 +41,9 @@ Live di http://ppwstarter.herokuapp.com
 3. Go to **your_project_name/settings.py**
    Change **starter** into your project name from these various lines<br/>`` `ROOT_URLCONF = 'starter.urls'` ``<br/>`` `WSGI_APPLICATION = 'starter.wsgi.application'` ``
 4. Go to **wsgi.py** and rename the word starter to your project name<br/>`os.environ.setdefault("DJANGO_SETTINGS_MODULE", "starter.settings")`<br/>
+5. Go to **Procfile** and rename this line
+   `web: gunicorn starter.wsgi`
+   change starter to your project name<br/>
    **Just to make sure, search for any starter word in your project and rename it to your project name**. _except for the readme file obviously._
 
 ### Using this starterpack
