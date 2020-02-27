@@ -1,1 +1,1 @@
-web: gunicorn starter.wsgi
+web: gunicorn MobilTermurah.wsgi

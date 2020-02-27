@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-ROOT_URLCONF = 'starter.urls'
+ROOT_URLCONF = 'MobilTermurah.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'starter.wsgi.application'
+WSGI_APPLICATION = 'MobilTermurah.wsgi.application'
 
 
 # Database
