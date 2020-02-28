@@ -9,7 +9,7 @@
 
 The links to various items we have created in the development of our application can be seen below:
 
-1.  [Persona](https://www.figma.com/file/lyjzcuZEP7TVEGpqKX9HB6/CarRentalPersonas?node-id=0%3A1)
+1.  Persona (which is attached as a PDF file).
 2.  [Wireframe](https://wireframe.cc/hWABGL)
 3.  [Prototype](https://www.figma.com/file/foZ8AKcgXTqYVg56VbhE0M/MobilTermurah?node-id=0:1)
 4.  [Website Link (**Heroku**)](https://mobiltermurah.herokuapp.com/)
