@@ -14,11 +14,11 @@ class Car(models.Model):
     carPrice = models.CharField(max_length=15)
     carDescription = models.CharField(max_length=1000)
 class Transaction(models.Model):
-    carName = models.ForeignKey(Car)
+    carName = models.ForeignKey(Car, on_delete=models.CASCADE)
 class Category(models.Model):
-    carCategory = models.ForeignKey(Car)
+    carCategory = models.ForeignKey(Car, on_delete=models.CASCADE)
 class Article(models.Model):
-    carName = models.ForeignKey(Car)
+    carName = models.ForeignKey(Car, on_delete=models.CASCADE)
     articleContent = models.CharField(max_length=1000)
 class Review(models.Model):
-    carName = models.ForeignKey(Car)
+    carName = models.ForeignKey(Car, on_delete=models.CASCADE)
