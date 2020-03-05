@@ -44,8 +44,6 @@ def cars(request):
 #
 # View for carsView.html
 #
-
-## masih error
 def carsView(request, pk):
     car = Car.objects.get(id=pk)
     print(car.carName)
