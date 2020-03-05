@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 #
 # Import all models
@@ -8,12 +8,29 @@ from .models import *
 # Create your views here.
 
 #
-# Views for index.html
+# View for index.html
 #
 def home(request):
     return render(request,'pages/index.html')
 #
-# Views for cars.html
+# View for finding car based on car's name
+#
+def findCar(request):
+    #
+    # Retrieve the search query
+    #
+    target = request.POST['carName']
+    #
+    # Retrieve all car objects in the database
+    #
+    cars = Car.objects.all()
+    response = {
+        'cars' : cars,
+        'target' : target
+    }
+    return render(request, 'pages/carResult.html', response)
+#
+# View for cars.html
 #
 def cars(request):
     #
@@ -25,17 +42,12 @@ def cars(request):
     }
     return render(request, 'pages/cars.html', response)
 #
-# Views for carsView.html
+# View for carsView.html
 #
 def carsView(request):
     return render(request, 'pages/carsView.html')
 #
-# Views for about.html
-#
-def about(request):
-    return render(request, 'pages/about.html')
-#
-# Views for articles.html
+# View for articles.html
 #
 def articles(request):
     #
@@ -47,7 +59,7 @@ def articles(request):
     }
     return render(request, 'pages/articles.html', response)
 #
-# Views for choosing article
+# View for choosing article
 #
 def chooseArticle(request):
     #
@@ -64,19 +76,30 @@ def chooseArticle(request):
     }
     return render(request, 'pages/articleResult.html', response)
 #
-# Views for finding car based on car's name
+# View for rentForm.html
 #
-def findCar(request):
-    #
-    # Retrieve the search query
-    #
-    target = request.POST['carName']
-    #
-    # Retrieve all car objects in the database
-    #
-    cars = Car.objects.all()
-    response = {
-        'cars' : cars,
-        'target' : target
-    }
-    return render(request, 'pages/carResult.html', response)
+def rentForm(request):
+    return render(request, 'pages/rentForm.html')
+#
+# View for creating rent
+#
+def sendRentForm(request):
+    # Check for POST request
+    if(request.method == 'POST'):
+        # Retrieve the values of POST parameters
+        name = request.POST['carName']
+        category = request.POST['carCategory']
+        year = request.POST['carYear']
+        city = request.POST['carCity']
+        price = request.POST['carPrice']
+        description = request.POST['carDescription']
+        # Save the comment to the database
+        result = Car.objects.create(carName=name,carCategory=category,carYear=year,carCity=city,carPrice=price,carDescription=description)
+        result.save()
+        # Redirect to the index.html page to see the result
+        return redirect('index.html')
+#
+# View for about.html
+#
+def about(request):
+    return render(request, 'pages/about.html')
