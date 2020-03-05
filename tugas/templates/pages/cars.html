@@ -5,32 +5,34 @@
 <br>
 <div class="container">
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-md-3">
 		<div class="sidenav">
-			<h1>Category</h1>
+			<h2><b>Categories</b></h2>
+			<br>
 			<form action="/action_page.php">
 				<label for="vehicle1"> Sedan </label>
-				<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><br>
+				<input type="checkbox" id="vehicle1" name="vehicle1" value="Sedan"><br>
 				<label for="vehicle2"> Hatchback</label>
-				<input type="checkbox" id="vehicle2" name="vehicle2" value="Car"><br>
+				<input type="checkbox" id="vehicle2" name="vehicle2" value="Hatchback"><br>
 				<label for="vehicle3"> Family Car</label>
-				<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"><br>
+				<input type="checkbox" id="vehicle3" name="vehicle3" value="Family Car"><br>
 				<label for="vehicle3"> LCGC</label>
-				<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"><br>
+				<input type="checkbox" id="vehicle3" name="vehicle3" value="LCGC"><br>
 				<label for="vehicle3"> Jeep</label>
-				<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"><br>
+				<input type="checkbox" id="vehicle3" name="vehicle3" value="Jeep"><br>
 				<label for="vehicle3"> Truck</label>
-				<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"><br><br>
+				<input type="checkbox" id="vehicle3" name="vehicle3" value="Truck"><br><br>
 				
-				<input type="submit" value="Submit">
+				<a><button type="button" id="searchbutton" class="btn btn-sm mt-3" >
+                    <i class="fas fa-search"></i>Search</button></a>
 			  </form>
 		</div>
 	  </div>
 	  
-      <div class="col-sm-9">
+      <div class="col-md-9">
 		<div class="row">
 		{% for car in cars %}
-	<div class="col-sm-4" style="margin-top: 50px;">
+	<div class="col-md-4" style="margin-top: 50px;">
 		<div class="carbox">
 			<img src="{%static 'img/toyota-avanza.jpg'%}" alt="car1" style="height: 100px; width: 220px;">
 			<br><br>

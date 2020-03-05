@@ -93,6 +93,7 @@ h2#carname {
   background-color: #F7F5F5;
   overflow-x: hidden;
   padding-top: 20px;
+  padding-left: 10px;
 }
 
 .sidenav a {
@@ -105,4 +106,8 @@ h2#carname {
 
 .sidenav a:hover {
   color: #f1f1f1;
+}
+
+button#searchbutton {
+  background-color: #888888;
 }
