@@ -5,7 +5,6 @@ from django.db import models
 #
 # There are 5 models : Car, Transaction, Category, Article, Review
 #
-
 class Car(models.Model):
     carName = models.CharField(max_length=30)
     carCategory = models.CharField(max_length=20)
