@@ -84,14 +84,50 @@ class GroupAssignmentUnitTest (TestCase):
         response = Client().get('/about/')
         self.assertTemplateUsed(response, 'pages/about.html')
 
-    # def testStoryUsingHomeFunction(self):
-    #     found = resolve('/story6/')
-    #     self.assertEqual(found.func, home)
+#------------------------------------------------------------------------------ FUNCTION TESTING -------------------------------------------------------------------------
 
-    # def testContainsGreeting(self):
-    #     response = Client().get('/story6/')
-    #     response_content = response.content.decode('utf-8')
-    #     self.assertIn("Hello, how are you?", response_content)
+    def testHomePageUsingFunction(self):
+        found = resolve('/')
+        self.assertEqual(found.func, home)
+
+    def testCarsPageUsingFunction(self):
+        found = resolve('/cars/')
+        self.assertEqual(found.func, cars)
+
+    def testCarsViewPageUsingFunction(self):
+        found = resolve('/CarsView/')
+        self.assertEqual(found.func, carsView)
+
+    def testFindCarPageUsingFunction(self):
+        found = resolve('/findCar/')
+        self.assertEqual(found.func, findCar)
+
+    def testRentFormPageUsingFunction(self):
+        found = resolve('/RentForm/')
+        self.assertEqual(found.func, rentForm)
+
+    def testSendRentFormPageUsingFunction(self):
+        found = resolve('/sendRentForm/')
+        self.assertEqual(found.func, sendRentForm)
+
+    def testArticlesPageUsingFunction(self):
+        found = resolve('/articles/')
+        self.assertEqual(found.func, articles)
+
+    def testChooseArticlePageUsingFunction(self):
+        found = resolve('/chooseArticle/')
+        self.assertEqual(found.func, chooseArticle)
+
+    def testAboutPageUsingFunction(self):
+        found = resolve('/about/')
+        self.assertEqual(found.func, about)
+
+#------------------------------------------------------------------------------ CONTENT TESTING -------------------------------------------------------------------------
+
+    def testAboutPageContainsTitle(self):
+        response = Client().get('/about/')
+        response_content = response.content.decode('utf-8')
+        self.assertIn("About", response_content)
 
     # def testApps(self):
     #     self.assertEqual(Story6Config.name, 'story6')
