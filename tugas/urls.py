@@ -5,9 +5,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('',views.home,name='index'),
-    path('findCar', views.findCar, name='findCar'),
-    path('chooseArticle', views.chooseArticle, name='chooseArticle'),
-    path('sendRentForm', views.sendRentForm, name='sendRentForm'),
+    path('findCar/', views.findCar, name='findCar'),
+    path('chooseArticle/', views.chooseArticle, name='chooseArticle'),
+    path('sendRentForm/', views.sendRentForm, name='sendRentForm'),
     path('about/',views.about,name='about'),
     path('articles/',views.articles,name='articles'),
     path('cars/',views.cars,name='cars'),
