@@ -67,7 +67,7 @@ def chooseArticle(request):
     #
     target = request.POST['articleTitle']
     #
-    # Retieve all article object in the database
+    # Retrieve all article object in the database
     #
     articles = Article.objects.all()
     response = {
