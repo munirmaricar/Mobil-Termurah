@@ -33,7 +33,7 @@
 		{% for car in cars %}
 	<div class="col-md-4" style="margin-top: 50px;">
 		<div class="carbox">
-			<img src="{%static 'img/toyota-avanza.jpg'%}" alt="car1" style="height: 100px; width: 220px;">
+			<img src="{{car.carImage.url}}" alt="car1" style="height: 100px; width: 220px;">
 			<br><br>
 			<h2 id="carname">
 				<b>{{car.carName}}</b>
