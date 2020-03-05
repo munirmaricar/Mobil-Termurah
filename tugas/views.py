@@ -46,10 +46,10 @@ def cars(request):
 #
 
 ## masih error
-def carsView(request, name):
-    cat = get_object_or_404(Car, name=name)
-    car = Car.objects.filter(cat)
-    response = {'car' : Car}
+def carsView(request, pk):
+    car = Car.objects.get(id=pk)
+    print(car.carName)
+    response = {'car' : car}
     return render(request, 'pages/carsView.html', response)
 #
 # View for articles.html
