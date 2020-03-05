@@ -89,6 +89,10 @@ def sendRentForm(request):
         # Retrieve the values of POST parameters
         name = request.POST['carName']
         category = request.POST['carCategory']
+        _categories = Category.objects.all()
+        for _category in _categories:
+            if category == _category.categoryName:
+                category = _category
         year = request.POST['carYear']
         city = request.POST['carCity']
         price = request.POST['carPrice']
@@ -97,7 +101,7 @@ def sendRentForm(request):
         result = Car.objects.create(carName=name,carCategory=category,carYear=year,carCity=city,carPrice=price,carDescription=description)
         result.save()
         # Redirect to the index.html page to see the result
-        return redirect('index.html')
+        return redirect('cars')
 #
 # View for about.html
 #
