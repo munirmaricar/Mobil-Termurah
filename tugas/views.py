@@ -24,8 +24,9 @@ def findCar(request):
     # Retrieve all car objects in the database
     #
     cars = Car.objects.all()
+    carTarget = filter(lambda car: car.carName.lower() == target.lower(), cars)
     response = {
-        'cars' : cars,
+        'cars' : carTarget,
         'target' : target
     }
     return render(request, 'pages/carResult.html', response)

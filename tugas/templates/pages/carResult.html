@@ -6,7 +6,7 @@
 	</title>
 </head>
 <body>
-	<table>{% for car in cars %}{% if target == car.carName %}
+	<table>{% for car in cars %}
 		<tr>
 			<td align="center">
 				Name: {{car.carName}}
@@ -26,7 +26,7 @@
 			<td align="center">
 				Description: {{car.carDescription}}
 			</td>
-		</tr>{% endif %}{% endfor %}
+		</tr>{% endfor %}
 	</table>
 </body>
 </html>
