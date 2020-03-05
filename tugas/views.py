@@ -85,7 +85,17 @@ def chooseArticle(request):
 # View for rentForm.html
 #
 def rentForm(request):
-    return render(request, 'pages/rentForm.html')
+    #
+    # Retrieve all categories type in database
+    #
+    categories = Category.objects.all()
+    #
+    # Assign it to a variable for rendering
+    #
+    response = {
+        'categories' : categories
+    }
+    return render(request, 'pages/rentForm.html', response)
 
 def articleForm(request):
     return render(request, 'pages/articleForm.html')
