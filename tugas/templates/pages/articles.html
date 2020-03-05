@@ -1,6 +1,7 @@
 {% extends 'pages/base.html'%}
 {% load static %}
 {% block content %}
+
 <table>{% for article in articles %}
     <tr>
         <td align="center">
@@ -16,5 +17,11 @@
         </td>
     </tr>{% endfor %}
 </table>
+
+<a href="{% url 'articleForm' %}" style="text-decoration: none;"> 
+    <button id="friendButton" type="button" class="btn btn-light">
+      Submit an Article </button> </a>
+
+
 {% endblock %}
 

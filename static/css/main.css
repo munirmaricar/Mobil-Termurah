@@ -102,3 +102,15 @@ button#searchbutton {
   background-color: #33514A;
   color: white;
 }
+
+.rentform {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+button#articlebutton {
+  background-color: #33514A;
+  color: white;
+}

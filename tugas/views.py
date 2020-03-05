@@ -80,6 +80,9 @@ def chooseArticle(request):
 #
 def rentForm(request):
     return render(request, 'pages/rentForm.html')
+
+def articleForm(request):
+    return render(request, 'pages/articleForm.html')
 #
 # View for creating rent
 #
