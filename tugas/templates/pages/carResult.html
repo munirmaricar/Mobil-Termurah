@@ -6,8 +6,27 @@
 	</title>
 </head>
 <body>
-	<table>
-		{{ result|safe }}
+	<table>{% for car in cars %}{% if target == car.carName %}
+		<tr>
+			<td align="center">
+				Name: {{car.carName}}
+			</td>
+			<td align="center">
+				Category: {{car.carCategory}}
+			</td>
+			<td align="center">
+				Year: {{car.carYear}}
+			</td>
+			<td align="center">
+				City: {{car.carCity}}
+			</td>
+			<td align="center">
+				Price: {{car.carPrice}}
+			</td>
+			<td align="center">
+				Description: {{car.carDescription}}
+			</td>
+		</tr>{% endif %}{% endfor %}
 	</table>
 </body>
 </html>

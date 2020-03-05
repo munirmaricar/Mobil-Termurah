@@ -16,24 +16,12 @@ def home(request):
 # Views for cars.html
 #
 def cars(request):
-    result = "<tr><td>"
     #
     # Retrieve all objects in the table
     #
     cars = Car.objects.all()
-    #
-    # Put the car details into the result
-    #
-    for car in cars:
-        result += "Car name: " + car.carName + "<br>" + "Car category: " + car.carCategory + "<br>" + "Car year: " + car.carYear + "<br>" + "Car city: " + car.carCity + "<br>" + "Car price: " + car.carPrice + "<br>" + "Car description: " + car.carDescription + "<br><br>"
-    #
-    # Condition for no car found
-    #
-    if result == "<tr><td>":
-        result += "Car not found"
-    result += "</td></tr>"
     response = {
-        'result' : result
+        'cars' : cars
     }
     return render(request, 'pages/cars.html', response)
 #
@@ -50,8 +38,31 @@ def about(request):
 # Views for articles.html
 #
 def articles(request):
-    return render(request, 'pages/articles.html')
-
+    #
+    # Retrieve all car objects in the database
+    #
+    articles = Article.objects.all()
+    response = {
+        'articles' : articles
+    }
+    return render(request, 'pages/articles.html', response)
+#
+# Views for choosing article
+#
+def chooseArticle(request):
+    #
+    # Retrieve the search query
+    #
+    target = request.POST['articleTitle']
+    #
+    # Retieve all article object in the database
+    #
+    articles = Article.objects.all()
+    response = {
+        'articles' : articles,
+        'target' : target
+    }
+    return render(request, 'pages/articleResult.html', response)
 #
 # Views for finding car based on car's name
 #
@@ -60,24 +71,12 @@ def findCar(request):
     # Retrieve the search query
     #
     target = request.POST['carName']
-    result = "<tr><td>"
     #
-    # Retrieve all objects in the table
+    # Retrieve all car objects in the database
     #
     cars = Car.objects.all()
-    #
-    # Put the car details into the result
-    #
-    for car in cars:
-        if target == car.carName:
-            result += "Car name: " + car.carName + "<br>" + "Car category: " + car.carCategory + "<br>" + "Car year: " + car.carYear + "<br>" + "Car city: " + car.carCity + "<br>" + "Car price: " + car.carPrice + "<br>" + "Car description: " + car.carDescription + "<br>"
-    #
-    # Condition for no car found
-    #
-    if result == "<tr><td>":
-        result += "Car not found"
-    result += "</td></tr>"
     response = {
-        'result' : result
+        'cars' : cars,
+        'target' : target
     }
     return render(request, 'pages/carResult.html', response)

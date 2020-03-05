@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>
+		Article Result
+	</title>
+</head>
+<body>
+	<table>{% for article in articles %}{% if target == article.articleName %}
+		<tr>
+			<td align="center">
+				Title: {{article.articleTitle}}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Content:<br>
+				<textarea style="rows: 100;cols: 100;border-radius: 10px;">
+					{{article.articleContent}}
+				</textarea>
+			</td>
+		</tr>{% endif %}{% endfor %}
+	</table>
+</body>
+</html>
