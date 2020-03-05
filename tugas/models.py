@@ -16,8 +16,9 @@ class Transaction(models.Model):
     carName = models.ForeignKey(Car, on_delete=models.CASCADE)
 class Category(models.Model):
     carCategory = models.ForeignKey(Car, on_delete=models.CASCADE)
+    categoryName = models.CharField(max_length=20)
 class Article(models.Model):
     carName = models.ForeignKey(Car, on_delete=models.CASCADE)
-    articleContent = models.CharField(max_length=1000)
 class Review(models.Model):
     carName = models.ForeignKey(Car, on_delete=models.CASCADE)
+    carReview = models.CharField(max_length=1000)
