@@ -34,6 +34,7 @@
 		{% for car in cars %}
 	<div class="col-md-4" style="margin-top: 50px;">
 		<div class="carbox">
+			<a href="{%url 'carsView'%}">
 			<img src="{{car.carImage.url}}" alt="car1" style="height: 100px; width: 220px;">
 			<br><br>
 			<h2 id="carname">
@@ -46,6 +47,7 @@
 					Rp.{{car.carPrice|slice:":1"}}jt/day
 				{% endif %}
 			</h2>
+		</a>
 		</div>
 	</div>
 		{% endfor %}

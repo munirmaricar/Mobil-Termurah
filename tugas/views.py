@@ -44,8 +44,13 @@ def cars(request):
 #
 # View for carsView.html
 #
-def carsView(request):
-    return render(request, 'pages/carsView.html')
+
+## masih error
+def carsView(request, name):
+    cat = get_object_or_404(Car, name=name)
+    car = Car.objects.filter(cat)
+    response = {'car' : Car}
+    return render(request, 'pages/carsView.html', response)
 #
 # View for articles.html
 #

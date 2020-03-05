@@ -114,3 +114,13 @@ button#articlebutton {
   background-color: #33514A;
   color: white;
 }
+
+a {
+  text-decoration: none;
+  color: #518384;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #518384;
+}
