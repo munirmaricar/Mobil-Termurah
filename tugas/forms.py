@@ -1,3 +1,4 @@
 from django import forms
+from .models import Car, Transaction, Category, Article, Review
 
-##Create your forms here
+# class RentForm(forms.ModelForm)
