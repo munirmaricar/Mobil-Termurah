@@ -1,14 +1,27 @@
 {% extends 'pages/base.html'%}
 {% load static %}
 {% block content %}
-	<table>{% for article in articles %}
-		<tr>
-			<td align="center">
-				<form method="POST" action="{% url 'chooseArticle' %}">{% csrf_token %}
-					<input type='hidden' name='articleTitle' value="{{article.articleTitle}}">
-					<button onclick='document.form.submit()'>Title: {{article.articleTitle}}</button>
-				</form>
-			</td>
-		</tr>{% endfor %}
-	</table>
+
+<table>{% for article in articles %}
+    <tr>
+        <td align="center">
+            Title: {{article.articleTitle}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Content:<br>
+            <textarea style="border-radius: 10px;" rows = "100" cols = "100">
+                {{article.articleContent}}
+            </textarea>
+        </td>
+    </tr>{% endfor %}
+</table>
+
+<a href="{% url 'articleForm' %}" style="text-decoration: none;"> 
+    <button id="friendButton" type="button" class="btn btn-light">
+      Submit an Article </button> </a>
+
+
 {% endblock %}
+

@@ -88,21 +88,39 @@ h2#carname {
 }
 
 .sidenav {
-  height: 400px;
-  width: 160px;
+  height: 325px;
+  width: 200px;
   background-color: #F7F5F5;
-  overflow-x: hidden;
-  padding-top: 20px;
+  padding-top: 10px;
+  padding-left: 15px;
+  color: #356067;
+  margin-right: 100px;
+  padding-bottom: 5px;
 }
 
-.sidenav a {
-  padding: 6px 8px 6px 16px;
+button#searchbutton {
+  background-color: #33514A;
+  color: white;
+}
+
+.rentform {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+button#articlebutton {
+  background-color: #33514A;
+  color: white;
+}
+
+a {
   text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
+  color: #518384;
 }
 
-.sidenav a:hover {
-  color: #f1f1f1;
+a:hover {
+  text-decoration: none;
+  color: #518384;
 }

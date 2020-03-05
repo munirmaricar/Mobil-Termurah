@@ -2,55 +2,33 @@
 {% extends 'pages/base.html'%}
 {% load static %}
 {% block content %}
+<div class="container">
 	<form method="POST" action="{% url 'sendRentForm' %}">{% csrf_token %}
-		<table>
-			<tr>
-				<td align="center">
-					Name
-					<br>
-					<input type='text' name='carName'>
-				</td>
-			</tr>
-			<tr>
-				<td align="center">
-					Category
-					<br>
-					<input type='text' name='carCategory'>
-				</td>
-			</tr>
-			<tr>
-				<td align="center">
-					Year
-					<br>
-					<input type='text' name='carYear'>
-				</td>
-			</tr>
-			<tr>
-				<td align="center">
-					City
-					<br>
-					<input type='text' name='carCity'>
-				</td>
-			</tr>
-			<tr>
-				<td align="center">
-					Price
-					<br>
-					<input type='text' name='carPrice'>
-				</td>
-			</tr>
-			<tr>
-				<td align="center">
-					Description
-					<br>
-					<input type='text' name='carDescription'>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type='submit' value='Submit'>
-				</td>
-			</tr>
-		</table>
-	</form>
+		<div class="form-group">
+			<label for="">Name</label>
+			<input type='text' name='carName' class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="">Category</label>
+			<input type='text' name='carCategory' class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="">Year</label>
+			<input type='text' name='carYear' class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="">City</label>
+			<input type='text' name='carCity' class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="">Price</label>
+			<input type='text' name='carPrice' class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="">Description</label>
+			<input type='text' name='carDescription' class="form-control">
+		</div>
+		<input type='submit' value='Submit' class="btn btn-large btn-primary">					
+		</form>
+</div>
 {% endblock %}

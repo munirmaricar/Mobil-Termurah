@@ -1,32 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>
-		Find Car
-	</title>
-</head>
-<body>
-	<table>{% for car in cars %}
-		<tr>
-			<td align="center">
-				Name: {{car.carName}}
-			</td>
-			<td align="center">
-				Category: {{car.carCategory}}
-			</td>
-			<td align="center">
-				Year: {{car.carYear}}
-			</td>
-			<td align="center">
-				City: {{car.carCity}}
-			</td>
-			<td align="center">
-				Price: {{car.carPrice}}
-			</td>
-			<td align="center">
-				Description: {{car.carDescription}}
-			</td>
-		</tr>{% endfor %}
-	</table>
-</body>
-</html>
+<!-- Page for viewing cars/searching for cars -->
+{% extends 'pages/base.html'%}
+{% load static %}
+{% block content %}
+<br>
+<div class="container">
+    <div class="row">
+      <div class="col-md-3">
+		<div class="sidenav">
+			<h2><b>Categories</b></h2>
+			<br>
+			<form action="/action_page.php">
+				<label for="vehicle1"> Sedan </label>
+				<input type="checkbox" id="vehicle1" name="vehicle1" value="Sedan"><br>
+				<label for="vehicle2"> Hatchback</label>
+				<input type="checkbox" id="vehicle2" name="vehicle2" value="Hatchback"><br>
+				<label for="vehicle3"> Family Car</label>
+				<input type="checkbox" id="vehicle3" name="vehicle3" value="Family Car"><br>
+				<label for="vehicle3"> LCGC</label>
+				<input type="checkbox" id="vehicle3" name="vehicle3" value="LCGC"><br>
+				<label for="vehicle3"> Jeep</label>
+				<input type="checkbox" id="vehicle3" name="vehicle3" value="Jeep"><br>
+				<label for="vehicle3"> Truck</label>
+				<input type="checkbox" id="vehicle3" name="vehicle3" value="Truck"><br>
+				<a><button type="button" id="searchbutton" class="btn btn-sm mt-3" >
+                    <i class="fas fa-search"></i> Search</button></a>
+			  </form>
+		</div>
+	  </div>
+	  
+      <div class="col-md-9">
+		<div class="row">
+		{% for car in cars %}
+		
+	<div class="col-md-4" style="margin-top: 50px;">
+		<div class="carbox">
+			<a href="">
+			<img src="{{car.carImage.url}}" alt="car1" style="height: 100px; width: 220px;">
+			<br><br>
+			<h2 id="carname">
+				<b>{{car.carName}}</b>
+			</h2>
+			<h2>
+				{% if car.carPrice|length >= 5 and car.carPrice|length < 7 %}
+					Rp.{{car.carPrice|slice:":3"}}rb/day
+				{% elif car.carPrice|length >= 7 %}
+					Rp.{{car.carPrice|slice:":1"}}jt/day
+				{% endif %}
+			</h2>
+		</a>
+		</div>
+	</div>
+		{% endfor %}
+		</div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+{% endblock %}
