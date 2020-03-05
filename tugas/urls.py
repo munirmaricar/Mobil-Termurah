@@ -12,6 +12,7 @@ urlpatterns = [
     path('sendRentForm/', views.sendRentForm, name='sendRentForm'),
     path('articles/',views.articles,name='articles'),
     path('ArticleForm/',views.articleForm,name='articleForm'),
+    path('SendArticleForm/', views.sendArticleForm, name='SendArticleForm'),
     path('chooseArticle/', views.chooseArticle, name='chooseArticle'),
     path('about/',views.about,name='about'),
 ]
