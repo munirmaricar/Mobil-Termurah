@@ -4,7 +4,7 @@ from django.apps import apps
 from .apps import *
 from .views import *
 from .models import *
-from .forms import  
+from .forms import *
 
 # Create your tests here.
 class Story6UnitTest (TestCase):
