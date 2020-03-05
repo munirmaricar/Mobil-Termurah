@@ -1,12 +1,14 @@
-.navbar-light .navbar-nav .nav-link{
+body{
   font-family: 'Raleway', sans-serif;
+}
+.navbar-light .navbar-nav .nav-link{  
   color: #518384;
   font-weight: bold;
   margin-right: 50px;
 }
 .form-control{
   color: #518384;
-  border: 2px solid #518384;
+  border: 3px solid #518384;
   border-radius: 25px;
   background: #F6F5F5;
 }
@@ -16,6 +18,21 @@
 .navbar-brand img{
   height: 74px; 
   width: 340px;
+}
+
+.carousel-item > img{
+  height: 600px;
+}
+.blue{
+  background: #356067;
+  border-color: #356067;
+}
+.darkBlue{
+  background: #33514A;
+  border-color: #33514A;
+}
+.btn-group-lg>.btn, .btn-lg{
+  font-weight: bold;
 }
 
 @media (max-width: 576px) {
