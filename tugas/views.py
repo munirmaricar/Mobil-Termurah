@@ -27,6 +27,7 @@ def findCar(request):
     carTarget = filter(lambda car: car.carName.lower() == target.lower(), cars)
     response = {
         'cars' : carTarget,
+        'target' : target
     }
     return render(request, 'pages/carResult.html', response)
 #
@@ -62,6 +63,24 @@ def articles(request):
     }
     return render(request, 'pages/articles.html', response)
 #
+# View for sending an article
+#
+def sendArticleForm(request):
+    #
+    # Retrieve all the queries
+    #
+    title = request.POST['articleTitle']
+    content = request.POST['articleContent']
+    #
+    # Save the request to the database
+    #
+    result = Article.objects.create(articleTitle=title,articleContent=content)
+    result.save()
+    #
+    # Redirect to articles.html
+    #
+    return redirect('articles')
+#
 # View for choosing article
 #
 def chooseArticle(request):
@@ -73,16 +92,31 @@ def chooseArticle(request):
     # Retrieve all article object in the database
     #
     articles = Article.objects.all()
-    response = {
-        'articles' : articles,
-        'target' : target
-    }
+    #
+    # Choose the article
+    #
+    for article in articles:
+        if target == article.articleTitle:
+            response = {
+                'title' : article.articleTitle,
+                'content' : article.articleContent
+            }
     return render(request, 'pages/articleResult.html', response)
 #
 # View for rentForm.html
 #
 def rentForm(request):
-    return render(request, 'pages/rentForm.html')
+    #
+    # Retrieve all categories type in database
+    #
+    categories = Category.objects.all()
+    #
+    # Assign it to a variable for rendering
+    #
+    response = {
+        'categories' : categories
+    }
+    return render(request, 'pages/rentForm.html', response)
 
 def articleForm(request):
     return render(request, 'pages/articleForm.html')

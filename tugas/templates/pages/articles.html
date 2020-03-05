@@ -5,18 +5,14 @@
 <table>{% for article in articles %}
     <tr>
         <td align="center">
-            Title: {{article.articleTitle}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Content:<br>
-            <textarea style="border-radius: 10px;" rows = "100" cols = "100">
-                {{article.articleContent}}
-            </textarea>
+			<form method='POST' action="{% url 'chooseArticle' %}">{% csrf_token %}
+				<button name='articleTitle' value='{{article.articleTitle}}' onclick='document.form.submit()'>
+					Title: {{article.articleTitle}}
+				</button>
+			</form>
         </td>
     </tr>{% endfor %}
-</table>
+</table><br>
 
 <a href="{% url 'articleForm' %}" style="text-decoration: none;"> 
     <button id="friendButton" type="button" class="btn btn-light">
