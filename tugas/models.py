@@ -16,6 +16,7 @@ class Car(models.Model):
     carCity = models.CharField(max_length=50)
     carPrice = models.CharField(max_length=15)
     carDescription = models.CharField(max_length=1000)
+    carImage = models.ImageField(upload_to= 'media/', default = 'static/img/Car.png')
     def __str__(self):
         return self.carName
 class Transaction(models.Model):
