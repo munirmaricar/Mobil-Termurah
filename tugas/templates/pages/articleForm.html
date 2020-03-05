@@ -1,14 +1,20 @@
 {% extends 'pages/base.html'%}
 {% load static %}
 {% block content %}
-<table>{% for article in articles %}
-    <tr>
-        <td align="center">
-            <form method="POST" action="{% url 'chooseArticle' %}">{% csrf_token %}
-                <input type='hidden' name='articleTitle' value="{{article.articleTitle}}">
-                <button onclick='document.form.submit()'>Title: {{article.articleTitle}}</button>
-            </form>
-        </td>
-    </tr>{% endfor %}
-</table>
+<br><br>
+<div class="container">
+	<form method="POST" action="{% url 'sendRentForm' %}">{% csrf_token %}
+		<div class="form-group">
+			<label for="">Title</label>
+			<input type='text' name='articleTitle' class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="">Content</label>
+			<textarea name='articleContent' class="form-control"></textarea>
+		</div>
+	
+		<input type='submit' value='Submit' class="btn btn-large btn-primary">					
+		</form>
+</div>
+
 {% endblock %}
