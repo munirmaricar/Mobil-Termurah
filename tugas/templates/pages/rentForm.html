@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>
-		Rent your car!
-	</title>
-</head>
-<body>
+<!-- Form to put a car for rent -->
+{% extends 'pages/base.html'%}
+{% load static %}
+{% block content %}
 	<form method="POST" action="{% url 'sendRentForm' %}">{% csrf_token %}
 		<table>
 			<tr>
@@ -57,5 +53,4 @@
 			</tr>
 		</table>
 	</form>
-</body>
-</html>
+{% endblock %}
