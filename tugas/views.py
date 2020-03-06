@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 #
+# Import regex module for the search function
+#
+import re
+#
 # Import all models
 #
 from .models import *
@@ -24,10 +28,16 @@ def findCar(request):
     # Retrieve all car objects in the database
     #
     cars = Car.objects.all()
-    carTarget = filter(lambda car: car.carName.lower() == target.lower(), cars)
+    #
+    # Create a regex pattern
+    #
+    pattern = re.compile(target, re.IGNORECASE)
+    #
+    # Use lambda to find the cars
+    #
+    carTarget = filter(lambda car: re.search(pattern, car.carName), cars)
     response = {
         'cars' : carTarget,
-        'target' : target
     }
     return render(request, 'pages/carResult.html', response)
 #
@@ -118,6 +128,9 @@ def rentForm(request):
     }
     return render(request, 'pages/rentForm.html', response)
 
+#
+# View to print article form
+#
 def articleForm(request):
     return render(request, 'pages/articleForm.html')
 #
