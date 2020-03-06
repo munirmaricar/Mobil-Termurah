@@ -26,27 +26,6 @@
     </div>
     <div class="row"><br></div>
     <div class="row">
-        <h1 style="margin-left: 20px; color: #518384;"> <b>Most Viewed</b></h1> <br>
-        <div class="col-md-12">
-        <div class="row">
-        {% for article in articles %}
-        <div class="col-md-4">
-                <div class="carbox" style="width: 350px; height: 220px; padding-left: 10px; text-align: center; margin-right: 50px;">
-                    <form method='POST' action="{% url 'chooseArticle' %}">{% csrf_token %}
-                        <h1 id="articleTitle">{{article.articleTitle}}</h1>
-                        <br>
-                        <button style="background-color: #518384; color: white;"
-                        type="button" class="btn" name='articleTitle' value='{{article.articleTitle}}' onclick='document.form.submit()'>
-                            See Article 
-                         </button>
-                     </form>
-                </div>
-        </div>
-            {% endfor %}
-        </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col"></div>
         <div class="col-10" style="text-align: center;">
             <br>
