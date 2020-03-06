@@ -20,11 +20,11 @@
                 </h2>
                 <h2><i class="fas fa-star"></i> {{rating}}</h2>
                 <div id="buttonGroup">
-                    <button type="button" data-toggle="modal" data-target="#modalForm" class="btn btn-large btn-primary mt-3">
+                    <button id="revbutton" type="button" data-toggle="modal" data-target="#modalForm" class="btn btn-large btn-primary mt-3">
                         Add Reviews
                     </button> <br>
 					<form method="POST" action="{%url 'rentingForm' car.id%}">{% csrf_token %}
-						<button class="btn btn-large btn-primary mt-3" onclick="document.form.submit()">
+						<button id="revbutton" class="btn btn-large btn-primary mt-3" onclick="document.form.submit()">
 							Rent Car
 						</button>
                     </form>
@@ -61,16 +61,20 @@
   
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+          <h4 class="modal-title" style="color: #518384">What do you think about {{car.carName}}? </h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
   
         <!-- Modal body -->
         <div class="modal-body">
           <form method="POST" action="{%url 'sendReviewForm' car.id%}">{% csrf_token %}
-			<input type="text" name="carReview">
-			<input type="number" name="carRating" min="1" max="5">
-			<input type='submit' value="SUBMIT">
+            <h2 style="color: #518384;">Write your review:</h2>
+            <input type="text" name="carReview">
+            <br> <br>
+            <h2 style="color: #518384;">Please rate this car</h2>
+            <input type="number" name="carRating" min="1" max="5">
+            <br><br>
+			<input type='submit' value="SUBMIT" style="background-color: #518384; color: white;">
 		  </form>
         </div>
   

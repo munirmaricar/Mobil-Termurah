@@ -205,6 +205,12 @@ a#articlebutton {
   color: white;
 }
 
+#revbutton {
+  background-color: #33514A;
+  color: white;
+  border: none;
+}
+
 a {
   text-decoration: none;
   color: #518384;
