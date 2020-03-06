@@ -9,7 +9,7 @@
         <div class="row">
         {% for article in articles %}
         <div class="col-md-4">
-                <div class="carbox" style="width: 350px; height: 220px; padding-left: 10px; text-align: center; margin-right: 50px; margin-bottom: 15px; ">
+                <div class="articlebox">
                     <form method='POST' action="{% url 'chooseArticle' %}">{% csrf_token %}
                         <h1 id="articleTitle">{{article.articleTitle}}</h1>
                         <h2 style="margin-left: 20px; font-size: 15px;">{{article.articleContent|slice:30}}...</h2>
