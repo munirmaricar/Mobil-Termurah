@@ -9,28 +9,27 @@
 		  <br><br>
 		  {% include 'pages/categorybar.html' %}
 	  </div>
-	  
       <div class="col-md-9">
 		<div class="row">
 		{% for car in cars %}
-	<div class="col-md-4" style="margin-top: 50px;">
-		<div class="carbox">
-			<a href="{%url 'carsView' car.id%}">
-			<img src="{{car.carImage.url}}" alt="car1" style="height: 100px; width: 220px;">
-			<br><br>
-			<h2 id="carname">
-				<b>{{car.carName}}</b>
-			</h2>
-			<h2>
-				{% if car.carPrice|length >= 5 and car.carPrice|length < 7 %}
-					Rp.{{car.carPrice|slice:":3"}}rb/day
-				{% elif car.carPrice|length >= 7 %}
-					Rp.{{car.carPrice|slice:":1"}}jt/day
-				{% endif %}
-			</h2>
-		</a>
+		<div class="col-md-4" style="margin-top: 50px;">
+			<div class="carbox">
+				<a href="{%url 'carsView' car.id%}">
+				<img src="{{car.carImage.url}}" alt="car1" style="height: 100px; width: 220px;">
+				<br><br>
+				<h2 id="carname">
+					<b>{{car.carName}}</b>
+				</h2>
+				<h2>
+					{% if car.carPrice|length >= 5 and car.carPrice|length < 7 %}
+						Rp.{{car.carPrice|slice:":3"}}rb/day
+					{% elif car.carPrice|length >= 7 %}
+						Rp.{{car.carPrice|slice:":1"}}jt/day
+					{% endif %}
+				</h2>
+			</a>
+			</div>
 		</div>
-	</div>
 		{% endfor %}
 		</div>
       </div>
