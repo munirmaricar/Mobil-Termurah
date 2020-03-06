@@ -32,4 +32,3 @@ class Review(models.Model):
     carName = models.ForeignKey(Car, on_delete=models.CASCADE)
     carReview = models.CharField(max_length=1000)
     carRating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)])
-    
