@@ -125,6 +125,12 @@ h2#carname {
   color: #518384;
   font-weight: bold;
 }
+#review h2{
+  color: #518384;
+}
 button#searchbutton {
   background-color: white;
+}
+section{
+  min-height: 80vh;
 }
