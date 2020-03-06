@@ -184,5 +184,39 @@ def searchByCategory(request):
     }
     return render(request, 'pages/carResult.html', response)
 #
-# View for transactions
+# View for renting a car
 #
+def rentingForm(request, pk):
+    car = Car.objects.get(id=pk)
+    response = {
+        'car' : car
+    }
+    return render(request, 'pages/rentingForm.html', response)
+#
+# View for transaction when renting a car
+#
+def sendRentingForm(request, pk):
+    car = Car.objects.get(id=pk)
+    #
+    # Retrieve all the duration query
+    #
+    duration = request.POST['transactionDuration']
+    #
+    # Save the request to the database
+    #
+    result = Transaction.objects.create(carName=car, transactionDuration=duration)
+    result.save()
+    #
+    # Redirect the page to listOfTransaction.html
+    #
+    return redirect('listOfTransaction')
+#
+# View for list of transaction
+#
+def transaction(request):
+    transactions = Transaction.objects.all()
+    response = {
+        'transactions' : transactions
+    }
+    return render(request, 'pages/listOfTransaction.html', response)
+
