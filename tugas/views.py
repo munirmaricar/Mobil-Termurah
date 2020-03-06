@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 #
+# Import regex module for the search function
+#
+import re
+#
 # Import all models
 #
 from .models import *
@@ -24,10 +28,16 @@ def findCar(request):
     # Retrieve all car objects in the database
     #
     cars = Car.objects.all()
-    carTarget = filter(lambda car: car.carName.lower() == target.lower(), cars)
+    #
+    # Create a regex pattern
+    #
+    pattern = re.compile(target, re.IGNORECASE)
+    #
+    # Use lambda to find the cars
+    #
+    carTarget = filter(lambda car: re.search(pattern, car.carName), cars)
     response = {
         'cars' : carTarget,
-        'target' : target
     }
     return render(request, 'pages/carResult.html', response)
 #
@@ -38,6 +48,7 @@ def cars(request):
     # Retrieve all objects in the table
     #
     cars = Car.objects.all()
+    
     response = {
         'cars' : cars
     }
@@ -47,8 +58,9 @@ def cars(request):
 #
 def carsView(request, pk):
     car = Car.objects.get(id=pk)
-    print(car.carName)
-    response = {'car' : car}
+    review = filter(lambda review : review.carName == car.carName, Review.objects.all())
+    response = {'car' : car , 'reviews' : review}
+    print(len(review))
     return render(request, 'pages/carsView.html', response)
 #
 # View for articles.html
@@ -118,6 +130,9 @@ def rentForm(request):
     }
     return render(request, 'pages/rentForm.html', response)
 
+#
+# View to print article form
+#
 def articleForm(request):
     return render(request, 'pages/articleForm.html')
 #
@@ -147,3 +162,23 @@ def sendRentForm(request):
 #
 def about(request):
     return render(request, 'pages/about.html')
+#
+# View for finding all cars by category
+#
+def searchByCategory(request):
+    #
+    # Retrieve the category value from the checkbox
+    #
+    target = request.POST['vehicle']
+    #
+    # Retrieve all car objects in the database
+    #
+    cars = Car.objects.all()
+    #
+    # Use lambda to find the cars
+    #
+    carTarget = filter(lambda car: target==car.carCategory.categoryName, cars)
+    response = {
+        'cars' : carTarget,
+    }
+    return render(request, 'pages/carResult.html', response)

@@ -1,27 +1,38 @@
 {% extends 'pages/base.html'%}
 {% load static %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-5">
+
+<div class="container" id="carView">
+    <div class="row mt-5">
+        <div class="col-md-6">
             <img src="{{car.carImage.url}}" alt="" class="img-fluid">
         </div>
-        <div class="col-md-7">
-            <h2 id="carname">
+        <div class="col-md-6">
+            <h1 id="carNameView">
                 <b>{{car.carName}}</b>
-            </h2>
-            <h2>
-                {% if car.carPrice|length >= 5 and car.carPrice|length < 7 %}
+            </h1>
+            <h2 id="carPrice">
+                <b>{% if car.carPrice|length >= 5 and car.carPrice|length < 7 %}
                     Rp.{{car.carPrice|slice:":3"}}rb/day
                 {% elif car.carPrice|length >= 7 %}
                     Rp.{{car.carPrice|slice:":1"}}jt/day
-                {% endif %}
+                {% endif %}</b>
             </h2>
+            <div id="buttonGroup">
+                <a href="" class="btn btn-large btn-primary mt-3">
+                    Add Reviews
+                </a> <br>
+                <a href="" class="btn btn-large btn-primary mt-3">
+                    Rent Car
+                </a>
+            </div>
         </div>
+        
     </div>
-    
-    
 </div>
+{% for review in reviews %}
+    <h1>{{review.carReview}}</h1>
+{% endfor %}
 
 
 {% endblock %}
