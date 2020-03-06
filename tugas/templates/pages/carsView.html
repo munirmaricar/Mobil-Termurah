@@ -18,6 +18,7 @@
                     Rp.{{car.carPrice|slice:":1"}}jt/day
                 {% endif %}</b>
             </h2>
+            <h2><i class="fas fa-star"></i> {{rating}}</h2>
             <div id="buttonGroup">
                 <a href="" class="btn btn-large btn-primary mt-3">
                     Add Reviews
@@ -27,6 +28,13 @@
                 </a>
             </div>
         </div>
+    </div>
+    <h1>Reviews</h1>
+    <div class="row">
+        {% for review in reviews %}
+            <h2><i class="fas fa-star"></i> {{review.carR   ating}}</h2>
+            <h1>{{review.carReview}}</h1>
+         {% endfor %}
     </div>
 </div>
 
