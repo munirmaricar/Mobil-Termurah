@@ -1,16 +1,27 @@
 {% extends 'pages/base.html'%}
 {% load static %}
 {% block content %}
-<img src="{{cars.car." alt="car">
-<h2 id="carname">
-    <b>{{car.carName}}</b>
-</h2>
-<h2>
-    {% if car.carPrice|length >= 5 and car.carPrice|length < 7 %}
-        Rp.{{car.carPrice|slice:":3"}}rb/day
-    {% elif car.carPrice|length >= 7 %}
-        Rp.{{car.carPrice|slice:":1"}}jt/day
-    {% endif %}
-</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="{{car.carImage.url}}" alt="" class="img-fluid">
+        </div>
+        <div class="col-md-7">
+            <h2 id="carname">
+                <b>{{car.carName}}</b>
+            </h2>
+            <h2>
+                {% if car.carPrice|length >= 5 and car.carPrice|length < 7 %}
+                    Rp.{{car.carPrice|slice:":3"}}rb/day
+                {% elif car.carPrice|length >= 7 %}
+                    Rp.{{car.carPrice|slice:":1"}}jt/day
+                {% endif %}
+            </h2>
+        </div>
+    </div>
+    
+    
+</div>
+
 
 {% endblock %}

@@ -84,7 +84,8 @@ h2 {
 h2#carname {
   text-align: left;
   font-size: 20px;
-  text-transform: uppercase
+  text-transform: uppercase;
+  color: #518384;
 }
 
 .sidenav {
@@ -123,4 +124,13 @@ a {
 a:hover {
   text-decoration: none;
   color: #518384;
+}
+
+a#homebutton {
+  text-decoration: none;
+  border: none;
+}
+
+a#homebutton:hover {
+  box-shadow: 1px 1px 20px gray;
 }
