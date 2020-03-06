@@ -3,10 +3,15 @@
 {% block content %}
 
 <table align="center">
+	<tr>
+		<td align="center">
+			<h1>List of transactions</h1>
+		</td>
+	</tr>
 	{% for transaction in transactions %}
 	<tr>
 		<td align="center">
-			{{transaction.carName.carImage.url}}&nbsp;
+			<img src='{{transaction.carName.carImage.url}}'>&nbsp;
 		</td>
 		<td align="center">
 			{{transaction.carName.carName}}&nbsp;
