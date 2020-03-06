@@ -228,3 +228,28 @@ table#transtable {
   background-color: white;
   color: black;
 }
+
+textarea:focus {
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+  border-color: #518384 !important;
+  background-color: #F6F5F5 !important;
+}
+
+input:focus {
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+  background-color: #F6F5F5 !important;
+  border-color: #518384 !important;
+}
+
+input#sub {
+  text-decoration: none;
+  border: none !important;
+}
+
+input#sub:hover {
+  border: none;
+}
