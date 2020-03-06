@@ -182,3 +182,6 @@ def searchByCategory(request):
         'cars' : carTarget,
     }
     return render(request, 'pages/carResult.html', response)
+#
+# View for transactions
+#

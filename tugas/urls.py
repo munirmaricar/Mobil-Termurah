@@ -15,7 +15,8 @@ urlpatterns = [
     path('SendArticleForm/', views.sendArticleForm, name='SendArticleForm'),
     path('chooseArticle/', views.chooseArticle, name='chooseArticle'),
     path('about/',views.about,name='about'),
-    path('searchByCategory/', views.searchByCategory, name='searchByCategory')
+    path('searchByCategory/', views.searchByCategory, name='searchByCategory'),
+    #path('transaction/', views.transaction, name='transaction')
 ]
 
 if settings.DEBUG:
