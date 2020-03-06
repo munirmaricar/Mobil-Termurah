@@ -48,8 +48,13 @@ def cars(request):
     # Retrieve all car objects in the table
     #
     cars = Car.objects.all()
+    #
+    # Retrieve the review of the cars
+    #
+    reviews = Review.objects.all()
     response = {
-        'cars' : cars
+        'cars' : cars,
+        'reviews' : reviews
     }
     return render(request, 'pages/cars.html', response)
 #
