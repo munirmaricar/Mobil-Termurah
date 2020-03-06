@@ -45,10 +45,9 @@ def findCar(request):
 #
 def cars(request):
     #
-    # Retrieve all objects in the table
+    # Retrieve all car objects in the table
     #
     cars = Car.objects.all()
-    
     response = {
         'cars' : cars
     }
