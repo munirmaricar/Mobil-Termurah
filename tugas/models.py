@@ -7,8 +7,10 @@ from django.db import models
 #
 class Category(models.Model):
     categoryName = models.CharField(max_length=20)
+
     def __str__(self):
         return self.categoryName
+
 class Car(models.Model):
     carName = models.CharField(max_length=30)
     carCategory = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -17,15 +19,20 @@ class Car(models.Model):
     carPrice = models.CharField(max_length=15)
     carDescription = models.CharField(max_length=1000)
     carImage = models.ImageField(upload_to= 'media/', default = 'static/img/Car.png')
+
     def __str__(self):
         return self.carName
+
 class Transaction(models.Model):
     carName = models.ForeignKey(Car, on_delete=models.CASCADE)
+
 class Article(models.Model):
     articleTitle = models.CharField(max_length=60)
     articleContent = models.CharField(max_length=10000)
+
     def __str__(self):
         return self.articleTitle
+
 class Review(models.Model):
     carName = models.ForeignKey(Car, on_delete=models.CASCADE)
     carReview = models.CharField(max_length=1000)
