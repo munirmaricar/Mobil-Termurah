@@ -253,4 +253,60 @@ class GroupAssignmentUnitTest (TestCase):
 
     def testAboutPageContainsCarsButton(self):
         response = Client().get('/')
-        response_content = resp
+        response_content = response.content.decode('utf-8')
+        self.assertIn("Cars", response_content)
+    
+    def testAboutPageContainsArticleButton(self):
+        response = Client().get('/')
+        response_content = response.content.decode('utf-8')
+        self.assertIn("Article", response_content)
+
+    def testAboutPageContainsAboutButton(self):
+        response = Client().get('/')
+        response_content = response.content.decode('utf-8')
+        self.assertIn("About", response_content)
+    
+#------------------------------------------------------------------------------ MODEL TESTING --------------------------------------------------------------------------
+
+    def testModelCreateNewCategory(self): 
+        newCategory = Category.objects.create(categoryName='Sporty')
+        numberOfCategories = Category.objects.all().count()
+        self.assertEqual(numberOfCategories, 1)
+
+    def testModelCreateNewCar(self): 
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
+        numberOfCars= Category.objects.all().count()
+        self.assertEqual(numberOfCars, 1)
+
+    def testModelCreateNewTransaction(self): 
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
+        newTransaction = Transaction.objects.create(carName=newCar)
+        numberOfTransactions = Transaction.objects.all().count()
+        self.assertEqual(numberOfTransactions, 1)
+
+    def testModelCreateNewArticle(self): 
+        newArticle = Article.objects.create(articleTitle='Rising Demand of Electric Vehicles', articleContent='This is because of environmental concerns')
+        numberOfArticles = Article.objects.all().count()
+        self.assertEqual(numberOfArticles, 1)
+
+    def testModelCreateNewReview(self): 
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
+        newReview = Review.objects.create(carName=newCar, carReview='Highly recommend this car to anybody who is rich!')
+        numberOfReviews = Review.objects.all().count()
+        self.assertEqual(numberOfReviews, 1)
+
+    def testModelCategoryReturnsString(self):
+        newCategory = Category.objects.create(categoryName='Sporty')
+        self.assertEqual(str(newCategory), newCategory.categoryName)
+
+    def testModelCarReturnsString(self):
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
+        self.assertEqual(str(newCar), newCar.carName)
+
+    def testModelArticleReturnsString(self):
+        newArticle = Article.objects.create(articleTitle='Rising Demand of Electric Vehicles', articleContent='This is because of environmental concerns')
+        self.assertEqual(str(newArticle), newArticle.articleTitle)
