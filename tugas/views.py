@@ -27,6 +27,7 @@ def findCar(request):
     #
     # Retrieve all car objects in the database
     #
+    category = Category.objects.all()
     cars = Car.objects.all()
     #
     # Create a regex pattern
@@ -38,6 +39,7 @@ def findCar(request):
     carTarget = filter(lambda car: re.search(pattern, car.carName), cars)
     response = {
         'cars' : carTarget,
+        'categories' : category,
     }
     return render(request, 'pages/carResult.html', response)
 #
@@ -48,8 +50,10 @@ def cars(request):
     # Retrieve all car objects in the table
     #
     cars = Car.objects.all()
+    category = Category.objects.all()
     response = {
-        'cars' : cars
+        'cars' : cars,
+        'categories':category
     }
     return render(request, 'pages/cars.html', response)
 #
@@ -57,9 +61,10 @@ def cars(request):
 #
 def carsView(request, pk):
     car = Car.objects.get(id=pk)
-    review = list(filter(lambda review : review.carName == car.carName, Review.objects.all()))
+    review = list(filter(lambda review : review.carName.carName == car.carName, Review.objects.all()))
     ratings = list(map(lambda review : review.carRating, review))
     rating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
+    print(rating)
     response = {'car' : car , 'reviews' : review, 'rating' : rating}
     return render(request, 'pages/carsView.html', response)
 #
