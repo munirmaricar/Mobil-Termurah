@@ -49,12 +49,14 @@ def cars(request):
     #
     cars = Car.objects.all()
     #
-    # Retrieve the review of the cars
+    # Assign the rating in each car
     #
-    reviews = Review.objects.all()
+    for car in cars:
+        review = list(filter(lambda review : review.carName == car, Review.objects.all()))
+        ratings = list(map(lambda review : review.carRating, review))
+        car.carRating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
     response = {
         'cars' : cars,
-        'reviews' : reviews
     }
     return render(request, 'pages/cars.html', response)
 #

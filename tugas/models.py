@@ -20,6 +20,7 @@ class Car(models.Model):
     carPrice = models.CharField(max_length=15)
     carDescription = models.CharField(max_length=1000)
     carImage = models.ImageField(upload_to= 'media/', default = 'static/img/Car.png')
+    carRating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)])
 
     def __str__(self):
         return self.carName
