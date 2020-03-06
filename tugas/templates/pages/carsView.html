@@ -67,7 +67,11 @@
   
         <!-- Modal body -->
         <div class="modal-body">
-          Modal body..
+          <form method="POST" action="{%url 'sendReviewForm' car.id%}">{% csrf_token %}
+			<input type="text" name="carReview">
+			<input type="number" name="carRating" min="1" max="5">
+			<input type='submit' value="SUBMIT">
+		  </form>
         </div>
   
         <!-- Modal footer -->

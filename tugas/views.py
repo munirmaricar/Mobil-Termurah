@@ -219,4 +219,19 @@ def transaction(request):
         'transactions' : transactions
     }
     return render(request, 'pages/listOfTransaction.html', response)
-
+#
+# View for sending a review
+#
+def sendReviewForm(request, pk):
+    #
+    # Retrieve all the queries
+    #
+    car = Car.objects.get(id=pk)
+    review = request.POST['carReview']
+    rating = request.POST['carRating']
+    #
+    # Save the queries
+    #
+    result = Review.objects.create(carName=car, carReview=review, carRating=rating)
+    result.save()
+    return redirect('cars')
