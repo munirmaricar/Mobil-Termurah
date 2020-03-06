@@ -16,6 +16,9 @@ urlpatterns = [
     path('chooseArticle/', views.chooseArticle, name='chooseArticle'),
     path('about/',views.about,name='about'),
     path('searchByCategory/', views.searchByCategory, name='searchByCategory'),
+    path(r'rentingForm/(?P<pk>\d+)/$',views.rentingForm,name='rentingForm'),
+    path(r'sendRentingForm/(?P<pk>\d+)/$',views.sendRentingForm,name='sendRentingForm'),
+    path('listOfTransaction/', views.transaction, name='listOfTransaction')
 ]
 
 if settings.DEBUG:
