@@ -45,10 +45,9 @@ def findCar(request):
 #
 def cars(request):
     #
-    # Retrieve all objects in the table
+    # Retrieve all car objects in the table
     #
     cars = Car.objects.all()
-    
     response = {
         'cars' : cars
     }
@@ -153,8 +152,9 @@ def sendRentForm(request):
         city = request.POST['carCity']
         price = request.POST['carPrice']
         description = request.POST['carDescription']
+        image = request.FILES['carImage']
         # Save the comment to the database
-        result = Car.objects.create(carName=name,carCategory=category,carYear=year,carCity=city,carPrice=price,carDescription=description)
+        result = Car.objects.create(carName=name,carCategory=category,carYear=year,carCity=city,carPrice=price,carDescription=description, carImage=image)
         result.save()
         # Redirect to the index.html page to see the result
         return redirect('cars')
