@@ -124,8 +124,17 @@ h2#carname {
 #review h1{
   color: #518384;
   font-weight: bold;
+  font-size: 1.5rem;
+}
+#heading h1{
+  font-size: 10rem;
 }
 #review h2{
+  color: #518384;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+#carView h2{
   color: #518384;
 }
 button#searchbutton {
