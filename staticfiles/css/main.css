@@ -1,0 +1,138 @@
+body{
+  font-family: 'Raleway', sans-serif;
+}
+.navbar-light .navbar-nav .nav-link{  
+  color: #518384;
+  font-weight: bold;
+  margin-right: 50px;
+}
+.form-control{
+  color: #518384;
+  border: 3px solid #518384;
+  border-radius: 25px;
+  background: #F6F5F5;
+}
+
+.bg-light{
+  background: #F6F5F5;
+}
+.navbar-brand img{
+  height: 74px; 
+  width: 340px;
+}
+
+.carousel-item > img{
+  height: 600px;
+}
+.blue{
+  background: #356067;
+  border-color: #356067;
+}
+.darkBlue{
+  background: #33514A;
+  border-color: #33514A;
+}
+.btn-group-lg>.btn, .btn-lg{
+  font-weight: bold;
+}
+
+#about{
+  padding-top: 5%;
+}
+
+#about h1{
+  font-weight: 700;
+  color: #518384;
+  font-size: 3rem;
+}
+#about p{
+  font-weight: bold;
+  color: #518384;
+  font-size: 1.5rem;
+  margin-top: 3rem;
+}
+@media (max-width: 576px) {
+  .navbar-brand img{
+    height: 40px; 
+    width: 200px;
+  }
+}
+
+.carbox {
+  margin-right: 10px;
+  border: 5px solid #518384;
+  width: 250px;
+  height: 300px;
+  background-color: white;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 5px;
+  color: #518384;
+}
+
+.carbox:hover {
+  border: 5px solid #518384;
+  width: 250px;
+  height: 300px;
+  box-shadow: 1px 1px 20px #888888;
+}
+
+h2 {
+  text-align: left;
+  font-size: 20px;
+}
+
+h2#carname {
+  text-align: left;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #518384;
+}
+
+.sidenav {
+  height: 325px;
+  width: 200px;
+  background-color: #F7F5F5;
+  padding-top: 10px;
+  padding-left: 15px;
+  color: #356067;
+  margin-right: 100px;
+  padding-bottom: 5px;
+}
+
+button#searchbutton {
+  background-color: #33514A;
+  color: white;
+}
+
+.rentform {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+a#articlebutton {
+  background-color: #33514A;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: #518384;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #518384;
+}
+
+a#homebutton {
+  text-decoration: none;
+  border: none;
+}
+
+a#homebutton:hover {
+  box-shadow: 1px 1px 20px gray;
+}
+

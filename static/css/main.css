@@ -95,19 +95,51 @@ h2#carname {
   padding-top: 20px;
   padding-left: 10px;
 }
-
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
+#carNameView{
+ font-size: 3.5rem;
+ color: #518384;
 }
 
-.sidenav a:hover {
-  color: #f1f1f1;
+#carPrice{
+  color: #518384;
+  font-size: 2rem;
 }
+#buttonGroup a{
+  width: 262px;
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
 
+}
+#buttonGroup a:first-of-type{
+  background: #356067;
+  border-color: #356067;
+  padding: 0.5rem;
+}
+#buttonGroup a:nth-of-type(2){
+  background: #33514A;
+  border-color: #33514A;
+  padding: 0.5rem;
+}
+#review h1{
+  color: #518384;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+#heading h1{
+  font-size: 10rem;
+}
+#review h2{
+  color: #518384;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+#carView h2{
+  color: #518384;
+}
 button#searchbutton {
   background-color: white;
+}
+section{
+  min-height: 80vh;
 }

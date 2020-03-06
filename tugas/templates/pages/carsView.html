@@ -1,4 +1,57 @@
 {% extends 'pages/base.html'%}
 {% load static %}
 {% block content %}
+<section id="carView">
+    <div class="container" id="carView">
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <img src="{{car.carImage.url}}" alt="" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <h1 id="carNameView">
+                    <b>{{car.carName}}</b>
+                </h1>
+                <h2 id="carPrice">
+                    <b>{% if car.carPrice|length >= 5 and car.carPrice|length < 7 %}
+                        Rp.{{car.carPrice|slice:":3"}}rb/day
+                    {% elif car.carPrice|length >= 7 %}
+                        Rp.{{car.carPrice|slice:":1"}}jt/day
+                    {% endif %}</b>
+                </h2>
+                <h2><i class="fas fa-star"></i> {{rating}}</h2>
+                <div id="buttonGroup">
+                    <a href="" class="btn btn-large btn-primary mt-3">
+                        Add Reviews
+                    </a> <br>
+                    <a href="" class="btn btn-large btn-primary mt-3">
+                        Rent Car
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="review">
+    <div class="container">
+        <h1 class="text-center mb-3" style="font-size: 3rem;">Reviews</h1>
+        <div class="row">
+            <div class="col-md-4">
+                {% for review in reviews %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-text">
+                            <h1><i class="fas fa-star"></i> {{review.carRating}}</h1>
+                <h2 style="font-style: italic;">"{{review.carReview}}"</h2>
+                        </div>
+                    </div>
+                </div>
+                
+            {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+    
+</section>
 {% endblock %}

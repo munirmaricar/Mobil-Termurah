@@ -1,0 +1,21 @@
+{% extends 'pages/base.html'%}
+{% load static %}
+{% block content %}
+
+<table align='center'>
+	<tr>
+		<td>
+			Title: {{title}}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Content:<br>
+			<textarea rows="20" cols="60" disabled>
+{{content}}
+			</textarea>
+		</td>
+	</tr>
+</table>
+
+{% endblock %}

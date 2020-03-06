@@ -1,32 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>
-		Find Car
-	</title>
-</head>
-<body>
-	<table>{% for car in cars %}{% if target == car.carName %}
-		<tr>
-			<td align="center">
-				Name: {{car.carName}}
-			</td>
-			<td align="center">
-				Category: {{car.carCategory}}
-			</td>
-			<td align="center">
-				Year: {{car.carYear}}
-			</td>
-			<td align="center">
-				City: {{car.carCity}}
-			</td>
-			<td align="center">
-				Price: {{car.carPrice}}
-			</td>
-			<td align="center">
-				Description: {{car.carDescription}}
-			</td>
-		</tr>{% endif %}{% endfor %}
-	</table>
-</body>
-</html>
+<!-- Page for viewing cars/searching for cars -->
+{% extends 'pages/base.html'%}
+{% load static %}
+{% block content %}
+<br>
+<div class="container">
+    <div class="row">
+      <div class="col-md-3">
+		<br><br>
+		{% include 'pages/categorybar.html' %}
+	  </div>
+	  
+      <div class="col-md-9">
+		<div class="row">
+		{% for car in cars %}
+		
+	<div class="col-md-4" style="margin-top: 50px;">
+		<div class="carbox">
+			<a href="{%url 'carsView' car.id%}">
+			<img src="{{car.carImage.url}}" alt="car1" style="height: 100px; width: 220px;">
+			<br><br>
+			<h2 id="carname">
+				<b>{{car.carName}}</b>
+			</h2>
+			<h2>
+				{% if car.carPrice|length >= 5 and car.carPrice|length < 7 %}
+					Rp.{{car.carPrice|slice:":3"}}rb/day
+				{% elif car.carPrice|length >= 7 %}
+					Rp.{{car.carPrice|slice:":1"}}jt/day
+				{% endif %}
+			</h2>
+		</a>
+		</div>
+	</div>
+		{% endfor %}
+		</div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+{% endblock %}

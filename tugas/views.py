@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 #
+# Import regex module for the search function
+#
+import re
+#
 # Import all models
 #
 from .models import *
@@ -24,9 +28,16 @@ def findCar(request):
     # Retrieve all car objects in the database
     #
     cars = Car.objects.all()
+    #
+    # Create a regex pattern
+    #
+    pattern = re.compile(target, re.IGNORECASE)
+    #
+    # Use lambda to find the cars
+    #
+    carTarget = filter(lambda car: re.search(pattern, car.carName), cars)
     response = {
-        'cars' : cars,
-        'target' : target
+        'cars' : carTarget,
     }
     return render(request, 'pages/carResult.html', response)
 #
@@ -37,6 +48,7 @@ def cars(request):
     # Retrieve all objects in the table
     #
     cars = Car.objects.all()
+    
     response = {
         'cars' : cars
     }
@@ -44,8 +56,13 @@ def cars(request):
 #
 # View for carsView.html
 #
-def carsView(request):
-    return render(request, 'pages/carsView.html')
+def carsView(request, pk):
+    car = Car.objects.get(id=pk)
+    review = list(filter(lambda review : review.carName == car.carName, Review.objects.all()))
+    ratings = list(map(lambda review : review.carRating, review))
+    rating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
+    response = {'car' : car , 'reviews' : review, 'rating' : rating}
+    return render(request, 'pages/carsView.html', response)
 #
 # View for articles.html
 #
@@ -59,6 +76,24 @@ def articles(request):
     }
     return render(request, 'pages/articles.html', response)
 #
+# View for sending an article
+#
+def sendArticleForm(request):
+    #
+    # Retrieve all the queries
+    #
+    title = request.POST['articleTitle']
+    content = request.POST['articleContent']
+    #
+    # Save the request to the database
+    #
+    result = Article.objects.create(articleTitle=title,articleContent=content)
+    result.save()
+    #
+    # Redirect to articles.html
+    #
+    return redirect('articles')
+#
 # View for choosing article
 #
 def chooseArticle(request):
@@ -67,19 +102,40 @@ def chooseArticle(request):
     #
     target = request.POST['articleTitle']
     #
-    # Retieve all article object in the database
+    # Retrieve all article object in the database
     #
     articles = Article.objects.all()
-    response = {
-        'articles' : articles,
-        'target' : target
-    }
+    #
+    # Choose the article
+    #
+    for article in articles:
+        if target == article.articleTitle:
+            response = {
+                'title' : article.articleTitle,
+                'content' : article.articleContent
+            }
     return render(request, 'pages/articleResult.html', response)
 #
 # View for rentForm.html
 #
 def rentForm(request):
-    return render(request, 'pages/rentForm.html')
+    #
+    # Retrieve all categories type in database
+    #
+    categories = Category.objects.all()
+    #
+    # Assign it to a variable for rendering
+    #
+    response = {
+        'categories' : categories
+    }
+    return render(request, 'pages/rentForm.html', response)
+
+#
+# View to print article form
+#
+def articleForm(request):
+    return render(request, 'pages/articleForm.html')
 #
 # View for creating rent
 #
@@ -107,3 +163,26 @@ def sendRentForm(request):
 #
 def about(request):
     return render(request, 'pages/about.html')
+#
+# View for finding all cars by category
+#
+def searchByCategory(request):
+    #
+    # Retrieve the category value from the checkbox
+    #
+    target = request.POST['vehicle']
+    #
+    # Retrieve all car objects in the database
+    #
+    cars = Car.objects.all()
+    #
+    # Use lambda to find the cars
+    #
+    carTarget = filter(lambda car: target==car.carCategory.categoryName, cars)
+    response = {
+        'cars' : carTarget,
+    }
+    return render(request, 'pages/carResult.html', response)
+#
+# View for transactions
+#
