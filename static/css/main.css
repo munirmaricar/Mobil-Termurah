@@ -121,7 +121,10 @@ h2#carname {
   border-color: #33514A;
   padding: 0.5rem;
 }
-
+#review h1{
+  color: #518384;
+  font-weight: bold;
+}
 button#searchbutton {
   background-color: white;
 }
