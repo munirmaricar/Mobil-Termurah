@@ -160,3 +160,23 @@ def sendRentForm(request):
 #
 def about(request):
     return render(request, 'pages/about.html')
+#
+# View for finding all cars by category
+#
+def searchByCategory(request):
+    #
+    # Retrieve the category value from the checkbox
+    #
+    target = request.POST['vehicle']
+    #
+    # Retrieve all car objects in the database
+    #
+    cars = Car.objects.all()
+    #
+    # Use lambda to find the cars
+    #
+    carTarget = filter(lambda car: target==car.carCategory.categoryName, cars)
+    response = {
+        'cars' : carTarget,
+    }
+    return render(request, 'pages/carResult.html', response)
