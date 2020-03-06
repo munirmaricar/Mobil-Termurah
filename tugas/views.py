@@ -57,7 +57,7 @@ def cars(request):
 #
 def carsView(request, pk):
     car = Car.objects.get(id=pk)
-    review = list(filter(lambda review : review.carName == car.carName, Review.objects.all()))
+    review = list(filter(lambda review : review.carName == car, Review.objects.all()))
     ratings = list(map(lambda review : review.carRating, review))
     rating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
     response = {'car' : car , 'reviews' : review, 'rating' : rating}
@@ -234,4 +234,7 @@ def sendReviewForm(request, pk):
     #
     result = Review.objects.create(carName=car, carReview=review, carRating=rating)
     result.save()
+    #
+    # Redirect to cars.html
+    #
     return redirect('cars')
