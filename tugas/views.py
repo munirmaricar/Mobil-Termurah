@@ -62,7 +62,6 @@ def carsView(request, pk):
     ratings = list(map(lambda review : review.carRating, review))
     rating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
     response = {'car' : car , 'reviews' : review, 'rating' : rating}
-    print(len(review))
     return render(request, 'pages/carsView.html', response)
 #
 # View for articles.html
