@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('',views.home,name='index'),
     path('cars/',views.cars,name='cars'),
-    path(r'^CarsView/(?P<pk>\d+)/$',views.carsView,name='carsView'),
+    path(r'CarsView/(?P<pk>\d+)/$',views.carsView,name='carsView'),
     path('findCar/', views.findCar, name='findCar'),
     path('RentForm/',views.rentForm,name='rentForm'),
     path('sendRentForm/', views.sendRentForm, name='sendRentForm'),
@@ -16,6 +16,9 @@ urlpatterns = [
     path('chooseArticle/', views.chooseArticle, name='chooseArticle'),
     path('about/',views.about,name='about'),
     path('searchByCategory/', views.searchByCategory, name='searchByCategory'),
+    path(r'rentingForm/(?P<pk>\d+)/$',views.rentingForm,name='rentingForm'),
+    path(r'sendRentingForm/(?P<pk>\d+)/$',views.sendRentingForm,name='sendRentingForm'),
+    path('listOfTransaction/', views.transaction, name='listOfTransaction')
 ]
 
 if settings.DEBUG:

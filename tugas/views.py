@@ -45,10 +45,9 @@ def findCar(request):
 #
 def cars(request):
     #
-    # Retrieve all objects in the table
+    # Retrieve all car objects in the table
     #
     cars = Car.objects.all()
-    
     response = {
         'cars' : cars
     }
@@ -153,8 +152,9 @@ def sendRentForm(request):
         city = request.POST['carCity']
         price = request.POST['carPrice']
         description = request.POST['carDescription']
+        image = request.FILES['carImage']
         # Save the comment to the database
-        result = Car.objects.create(carName=name,carCategory=category,carYear=year,carCity=city,carPrice=price,carDescription=description)
+        result = Car.objects.create(carName=name,carCategory=category,carYear=year,carCity=city,carPrice=price,carDescription=description, carImage=image)
         result.save()
         # Redirect to the index.html page to see the result
         return redirect('cars')
@@ -184,5 +184,39 @@ def searchByCategory(request):
     }
     return render(request, 'pages/carResult.html', response)
 #
-# View for transactions
+# View for renting a car
 #
+def rentingForm(request, pk):
+    car = Car.objects.get(id=pk)
+    response = {
+        'car' : car
+    }
+    return render(request, 'pages/rentingForm.html', response)
+#
+# View for transaction when renting a car
+#
+def sendRentingForm(request, pk):
+    car = Car.objects.get(id=pk)
+    #
+    # Retrieve all the duration query
+    #
+    duration = request.POST['transactionDuration']
+    #
+    # Save the request to the database
+    #
+    result = Transaction.objects.create(carName=car, transactionDuration=duration)
+    result.save()
+    #
+    # Redirect the page to listOfTransaction.html
+    #
+    return redirect('listOfTransaction')
+#
+# View for list of transaction
+#
+def transaction(request):
+    transactions = Transaction.objects.all()
+    response = {
+        'transactions' : transactions
+    }
+    return render(request, 'pages/listOfTransaction.html', response)
+

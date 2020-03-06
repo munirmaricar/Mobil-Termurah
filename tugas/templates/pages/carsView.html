@@ -23,9 +23,11 @@
                     <a href="" class="btn btn-large btn-primary mt-3">
                         Add Reviews
                     </a> <br>
-                    <a href="" class="btn btn-large btn-primary mt-3">
-                        Rent Car
-                    </a>
+					<form method="POST" action="{%url 'rentingForm' car.id%}">{% csrf_token %}
+						<button class="btn btn-large btn-primary mt-3" onclick="document.form.submit()">
+							Rent Car
+						</button>
+                    </form>
                 </div>
             </div>
         </div>
