@@ -58,10 +58,9 @@ def cars(request):
 #
 def carsView(request, pk):
     car = Car.objects.get(id=pk)
-    review = list(filter(lambda review : review.carName.carName == car.carName, Review.objects.all()))
-    ratings = list(map(lambda review : review.carRating, review))
-    rating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
-    response = {'car' : car , 'reviews' : review, 'rating':rating,}
+    review = filter(lambda review : review.carName == car.carName, Review.objects.all())
+    response = {'car' : car , 'reviews' : review}
+    print(len(review))
     return render(request, 'pages/carsView.html', response)
 #
 # View for articles.html
