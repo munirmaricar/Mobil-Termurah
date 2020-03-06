@@ -1,36 +1,47 @@
 {% extends 'pages/base.html'%}
 {% load static %}
 {% block content %}
-
-<table align="center">
-	{% for transaction in transactions %}
-	<tr>
-		<td align="center">
-			{{transaction.carName.carImage.url}}&nbsp;
-		</td>
-		<td align="center">
-			{{transaction.carName.carName}}&nbsp;
-		</td>
-		<td align="center">
-			{{transaction.carName.carCategory}}&nbsp;
-		</td>
-		<td align="center">
-			{{transaction.carName.carYear}}&nbsp;
-		</td>
-		<td align="center">
-			{{transaction.carName.carCity}}&nbsp;
-		</td>
-		<td align="center">
-			{{transaction.carName.carPrice}}&nbsp;
-		</td>
-		<td align="center">
-			{{transaction.carName.carDescription}}&nbsp;
-		</td>
-		<td align="center">
-			{{transaction..transactionDuration}}&nbsp;
-		</td>
-	</tr>
-	{% endfor %}
-</table>
-
+<br>
+<div class="container" style="max-width: 800px;">
+<table id="transtable" class="table table-info table-bordered" style="text-align: center;">
+	<thead>
+	  <tr>
+		<th scope="col">Car Name</th>
+		<th scope="col">Car Category</th>
+		<th scope="col">Car Year</th>
+		<th scope="col">Car City</th>
+		<th scope="col">Car Price</th>
+		<th scope="col">Car Description</th>
+		<th scope="col">Duration</th>
+	  </tr>
+	</thead>
+	<tbody>
+		{% for transaction in transactions %}
+		<tr>
+			<td align="center">
+				{{transaction.carName.carName}}&nbsp;
+			</td>
+			<td align="center">
+				{{transaction.carName.carCategory}}&nbsp;
+			</td>
+			<td align="center">
+				{{transaction.carName.carYear}}&nbsp;
+			</td>	
+			<td align="center">
+				{{transaction.carName.carCity}}&nbsp;
+			</td>
+			<td align="center">
+				{{transaction.carName.carPrice}}&nbsp;
+			</td>
+			<td align="center">
+				{{transaction.carName.carDescription}}&nbsp;
+			</td>	
+			<td align="center">
+				{{transaction.transactionDuration}}&nbsp;
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+  </table>
+</div>
 {% endblock %}
