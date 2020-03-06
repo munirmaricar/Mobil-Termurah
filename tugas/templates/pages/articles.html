@@ -1,26 +1,42 @@
 {% extends 'pages/base.html'%}
 {% load static %}
 {% block content %}
-
-<table>{% for article in articles %}
-    <tr>
-        <td align="center">
-            Title: {{article.articleTitle}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Content:<br>
-            <textarea style="border-radius: 10px;" rows = "100" cols = "100">
-                {{article.articleContent}}
-            </textarea>
-        </td>
-    </tr>{% endfor %}
-</table>
-
-<a href="{% url 'articleForm' %}" style="text-decoration: none;"> 
-    <button id="friendButton" type="button" class="btn btn-light">
-      Submit an Article </button> </a>
+<br>
+<div class="container">
+    <div class="row">
+        <h1 style="margin-left: 20px; color: #518384;"> <b>Latest</b></h1> <br>
+        <div class="col-md-12">
+        <div class="row">
+        {% for article in articles %}
+        <div class="col-md-4">
+                <div class="carbox" style="width: 350px; height: 220px; padding-left: 10px; text-align: center; margin-right: 50px;">
+                    <form method='POST' action="{% url 'chooseArticle' %}">{% csrf_token %}
+                        <h1 id="articleTitle">{{article.articleTitle}}</h1>
+                        <br>
+                        <button style="background-color: #518384; color: white;"
+                        type="button" class="btn" name='articleTitle' value='{{article.articleTitle}}' onclick='document.form.submit()'>
+                            See Article 
+                         </button>
+                     </form>
+                </div>
+        </div>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-10" style="text-align: center;">
+            <br>
+            <h1 style="font-size: 25px; color: #518384;">Got some ideas? Submit your own article!</h1>
+            <a href="{% url 'articleForm' %}" class="btn btn-primary" style="text-decoration: none; background-color: #518384; border: none;"> 
+                Submit an Article </a>
+                <br><br>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
 
 
 {% endblock %}
