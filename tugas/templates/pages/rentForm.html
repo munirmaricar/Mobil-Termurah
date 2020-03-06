@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 <div class="container">
-	<form method="POST" action="{% url 'sendRentForm' %}">{% csrf_token %}
+	<form method="POST" action="{% url 'sendRentForm' %}" enctype="multipart/form-data">{% csrf_token %}
 		<div class="form-group">
 			<label for="">Name</label>
 			<input type='text' name='carName' class="form-control">
@@ -30,6 +30,10 @@
 		<div class="form-group">
 			<label for="">Description</label>
 			<input type='text' name='carDescription' class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="">Select Image</label>
+			<input type="file" name="carImage">
 		</div>
 		<input type='submit' value='Submit' class="btn btn-large btn-primary">					
 		</form>
