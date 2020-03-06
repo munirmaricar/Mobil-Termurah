@@ -64,17 +64,17 @@ class GroupAssignmentUnitTest (TestCase):
         response = Client().get('/CarsView/')
         self.assertTemplateUsed(response, 'pages/carsView.html')
 
-    def testFindCarPageUsingTemplate(self):
-        response = Client().get('/findCar/')
-        self.assertTemplateUsed(response, 'pages/findCar.html')
+    # def testFindCarPageUsingTemplate(self):
+    #     response = Client().get('/findCar/')
+    #     self.assertTemplateUsed(response, 'pages/findCar.html')
 
     def testRentFormPageUsingTemplate(self):
         response = Client().get('/RentForm/')
         self.assertTemplateUsed(response, 'pages/rentForm.html')
 
-    def testSendRentFormPageUsingTemplate(self):
-        response = Client().get('/sendRentForm/')
-        self.assertTemplateUsed(response, 'pages/sendRentForm.html')
+    # def testSendRentFormPageUsingTemplate(self):
+    #     response = Client().get('/sendRentForm/')
+    #     self.assertTemplateUsed(response, 'pages/sendRentForm.html')
 
     def testArticlesPageUsingTemplate(self):
         response = Client().get('/articles/')
@@ -84,9 +84,9 @@ class GroupAssignmentUnitTest (TestCase):
         response = Client().get('/ArticleForm/')
         self.assertTemplateUsed(response, 'pages/articleForm.html')
 
-    def testChooseArticlePageUsingTemplate(self):
-        response = Client().get('/chooseArticle/')
-        self.assertTemplateUsed(response, 'pages/chooseArticle.html')
+    # def testChooseArticlePageUsingTemplate(self):
+    #     response = Client().get('/chooseArticle/')
+    #     self.assertTemplateUsed(response, 'pages/chooseArticle.html')
 
     def testAboutPageUsingTemplate(self):
         response = Client().get('/about/')
