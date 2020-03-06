@@ -48,6 +48,7 @@ def cars(request):
     # Retrieve all objects in the table
     #
     cars = Car.objects.all()
+    
     response = {
         'cars' : cars
     }
@@ -57,8 +58,9 @@ def cars(request):
 #
 def carsView(request, pk):
     car = Car.objects.get(id=pk)
-    print(car.carName)
-    response = {'car' : car}
+    review = filter(lambda review : review.carName == car.carName, Review.objects.all())
+    response = {'car' : car , 'reviews' : review}
+    print(len(review))
     return render(request, 'pages/carsView.html', response)
 #
 # View for articles.html

@@ -84,53 +84,44 @@ h2 {
 h2#carname {
   text-align: left;
   font-size: 20px;
-  text-transform: uppercase;
-  color: #518384;
+  text-transform: uppercase
 }
 
 .sidenav {
-  height: 325px;
-  width: 200px;
+  height: 400px;
+  width: 160px;
   background-color: #F7F5F5;
-  padding-top: 10px;
-  padding-left: 15px;
-  color: #356067;
-  margin-right: 100px;
-  padding-bottom: 5px;
+  overflow-x: hidden;
+  padding-top: 20px;
+  padding-left: 10px;
+}
+#carNameView{
+ font-size: 3.5rem;
+ color: #518384;
+}
+
+#carPrice{
+  color: #518384;
+  font-size: 2rem;
+}
+#buttonGroup a{
+  width: 262px;
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+
+}
+#buttonGroup a:first-of-type{
+  background: #356067;
+  border-color: #356067;
+  padding: 0.5rem;
+}
+#buttonGroup a:nth-of-type(2){
+  background: #33514A;
+  border-color: #33514A;
+  padding: 0.5rem;
 }
 
 button#searchbutton {
-  background-color: #33514A;
-  color: white;
-}
-
-.rentform {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-button#articlebutton {
-  background-color: #33514A;
-  color: white;
-}
-
-a {
-  text-decoration: none;
-  color: #518384;
-}
-
-a:hover {
-  text-decoration: none;
-  color: #518384;
-}
-
-a#homebutton {
-  text-decoration: none;
-  border: none;
-}
-
-a#homebutton:hover {
-  box-shadow: 1px 1px 20px gray;
+  background-color: white;
 }
