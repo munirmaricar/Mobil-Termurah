@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
@@ -21,6 +22,7 @@ class Car(models.Model):
         return self.carName
 class Transaction(models.Model):
     carName = models.ForeignKey(Car, on_delete=models.CASCADE)
+    transactionDuration = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1)])
 class Article(models.Model):
     articleTitle = models.CharField(max_length=60)
     articleContent = models.CharField(max_length=10000)
@@ -29,5 +31,5 @@ class Article(models.Model):
 class Review(models.Model):
     carName = models.ForeignKey(Car, on_delete=models.CASCADE)
     carReview = models.CharField(max_length=1000)
-    carRating = models.IntegerField(max_length=1,default=0)
+    carRating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)])
     
