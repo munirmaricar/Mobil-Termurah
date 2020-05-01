@@ -50,10 +50,15 @@ def cars(request):
     # Retrieve all car objects in the table
     #
     cars = Car.objects.all()
-    category = Category.objects.all()
+    #
+    # Assign the rating in each car
+    #
+    for car in cars:
+        review = list(filter(lambda review : review.carName == car, Review.objects.all()))
+        ratings = list(map(lambda review : review.carRating, review))
+        car.carRating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
     response = {
         'cars' : cars,
-        'categories':category
     }
     return render(request, 'pages/cars.html', response)
 #
@@ -61,7 +66,7 @@ def cars(request):
 #
 def carsView(request, pk):
     car = Car.objects.get(id=pk)
-    review = list(filter(lambda review : review.carName.carName == car.carName, Review.objects.all()))
+    review = list(filter(lambda review : review.carName == car, Review.objects.all()))
     ratings = list(map(lambda review : review.carRating, review))
     rating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
     print(rating)
@@ -239,4 +244,7 @@ def sendReviewForm(request, pk):
     #
     result = Review.objects.create(carName=car, carReview=review, carRating=rating)
     result.save()
+    #
+    # Redirect to cars.html
+    #
     return redirect('cars')

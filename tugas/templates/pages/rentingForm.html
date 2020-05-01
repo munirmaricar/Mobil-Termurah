@@ -1,28 +1,33 @@
 {% extends 'pages/base.html'%}
 {% load static %}
 {% block content %}
-
-<table align="center">
-	<tr>
-		<td>
-			Do you want to rent this car?<br>
-		<td>
-	</tr>
-	<tr>
-		<td>
-			<img src="{{car.carImage.url}}" alt="" class="img-fluid"><br>
-		</td>
-	</tr>
-	<tr>
-		<td>
+<br><br>
+<div class="container">
+	<div class="row" style="text-align: center;">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-10"><h1 style="color: #33514A">Do you want to rent this car?</h1></div>		
+		<div class="col-sm-1"></div>
+	</div>
+	<div class="row">
+		<div class="col"></div>
+		<div class="col"><img src="{{car.carImage.url}}" alt="" class="img-fluid"><br></div>		
+		<div class="col"></div>
+	</div>
+	<br>
+	<div class="row" style="text-align: center;"">
+		<div class="container">
 			<form method="POST" action="{%url 'sendRentingForm' car.id%}">{% csrf_token %}
-				<input type="text" name="transactionDuration" placeholder="Put your duration here [ in day ]">
-				<button class="btn btn-large btn-primary mt-3" onclick="document.form.submit()">
-					Rent it now
-				</button>
-            </form>
-		</td>
-	</tr>
-</table>
+			<div class="d-flex justify-content-center">
+				<input class="form-control" type="text" name="transactionDuration" placeholder="Put your duration here [ in day ]"
+				style="width: 500px;">	
+			</div>		
+			<button id="revbutton" class="btn btn-large btn-primary mt-3" onclick="document.form.submit()">
+				Rent it now
+			</button>
+		</form>
+	</div>
+	</div>
+</div>
+</div>
 
 {% endblock %}

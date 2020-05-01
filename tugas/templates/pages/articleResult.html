@@ -2,20 +2,10 @@
 {% load static %}
 {% block content %}
 
-<table align='center'>
-	<tr>
-		<td>
-			Title: {{title}}
-		</td>
-	</tr>
-	<tr>
-		<td>
-			Content:<br>
-			<textarea rows="20" cols="60" disabled>
-{{content}}
-			</textarea>
-		</td>
-	</tr>
-</table>
+<div class="container" id="about">
+	<h1 class="text-center">{{title}}</h1>
+	<p>{{content}}
+	</p>
+ </div>
 
 {% endblock %}

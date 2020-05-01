@@ -6,10 +6,10 @@ from .views import *
 from .models import *
 from .forms import *
 
-class GroupAssignmentUnitTest (TestCase):
+#class GroupAssignmentUnitTest (TestCase):
 
 #-------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
-
+class tests (TestCase):
     def testHomePageURL(self):
         response = Client().get('')
         self.assertEqual(response.status_code, 200)
@@ -18,23 +18,19 @@ class GroupAssignmentUnitTest (TestCase):
         response = Client().get('/cars/')
         self.assertEqual(response.status_code, 200)
 
-    # def testCarsViewPageURL(self, newCar):
-    #     newCategory = Category.objects.create(categoryName='Luxury')
-    #     newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
-    #     response = Client().get('/CarsView/')
-    #     self.assertEqual(response.status_code, 200)
+    def testCarsViewPageURL(self, newCar):
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
+        response = Client().get('/CarsView/')
+        self.assertEqual(response.status_code, 200)
 
-    # def testFindCarPageURL(self):
-    #     response = Client().get('/findCar/')
-    #     self.assertEqual(response.status_code, 200)
+    def testFindCarPageURL(self):
+        response = Client().get('/findCar/')
+        self.assertEqual(response.status_code, 200)
 
     def testRentFormPageURL(self):
             response = Client().get('/RentForm/')
             self.assertEqual(response.status_code, 200)
-
-    # def testSendRentFormPageURL(self):
-    #     response = Client().get('/sendRentForm/')
-    #     self.assertEqual(response.status_code, 200)
 
     def testArticlesPageURL(self):
         response = Client().get('/articles/')
@@ -44,16 +40,16 @@ class GroupAssignmentUnitTest (TestCase):
         response = Client().get('/ArticleForm/')
         self.assertEqual(response.status_code, 200)
 
-    # def testChooseArticlePageURL(self):
-    #     response = Client().get('/chooseArticle/')
-    #     self.assertEqual(response.status_code, 200)  
+    def testChooseArticlePageURL(self):
+        response = Client().get('/chooseArticle/')
+        self.assertEqual(response.status_code, 200)  
 
     def testAboutPageURL(self):
         response = Client().get('/about/')
         self.assertEqual(response.status_code, 200)
 
-#------------------------------------------------------------------------------ TEMPLATE TESTING -------------------------------------------------------------------------
-    
+    # ------------------------------------------------------------------------------ TEMPLATE TESTING -------------------------------------------------------------------------
+
     def testHomePageUsingTemplate(self):
         response = Client().get('')
         self.assertTemplateUsed(response, 'pages/index.html')
@@ -62,21 +58,13 @@ class GroupAssignmentUnitTest (TestCase):
         response = Client().get('/cars/')
         self.assertTemplateUsed(response, 'pages/cars.html')
 
-    # def testCarsViewPageUsingTemplate(self):
-    #     response = Client().get('/CarsView/')
-    #     self.assertTemplateUsed(response, 'pages/carsView.html')
-
-    # def testFindCarPageUsingTemplate(self):
-    #     response = Client().get('/findCar/')
-    #     self.assertTemplateUsed(response, 'pages/findCar.html')
+    def testFindCarPageUsingTemplate(self):
+        response = Client().get('/findCar/')
+        self.assertTemplateUsed(response, 'pages/findCar.html')
 
     def testRentFormPageUsingTemplate(self):
         response = Client().get('/RentForm/')
         self.assertTemplateUsed(response, 'pages/rentForm.html')
-
-    # def testSendRentFormPageUsingTemplate(self):
-    #     response = Client().get('/sendRentForm/')
-    #     self.assertTemplateUsed(response, 'pages/sendRentForm.html')
 
     def testArticlesPageUsingTemplate(self):
         response = Client().get('/articles/')
@@ -86,15 +74,15 @@ class GroupAssignmentUnitTest (TestCase):
         response = Client().get('/ArticleForm/')
         self.assertTemplateUsed(response, 'pages/articleForm.html')
 
-    # def testChooseArticlePageUsingTemplate(self):
-    #     response = Client().get('/chooseArticle/')
-    #     self.assertTemplateUsed(response, 'pages/chooseArticle.html')
+    def testChooseArticlePageUsingTemplate(self):
+        response = Client().get('/chooseArticle/')
+        self.assertTemplateUsed(response, 'pages/chooseArticle.html')
 
     def testAboutPageUsingTemplate(self):
         response = Client().get('/about/')
         self.assertTemplateUsed(response, 'pages/about.html')
 
-#------------------------------------------------------------------------------ FUNCTION TESTING -------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------ FUNCTION TESTING -------------------------------------------------------------------------
 
     def testHomePageUsingFunction(self):
         found = resolve('/')
@@ -136,13 +124,13 @@ class GroupAssignmentUnitTest (TestCase):
         found = resolve('/about/')
         self.assertEqual(found.func, about)
 
-#-------------------------------------------------------------------------------- APP TESTING ----------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------- APP TESTING ----------------------------------------------------------------------------
 
     def testApplication(self):
         self.assertEqual(TugasConfig.name, 'tugas')
         self.assertEqual(apps.get_app_config('tugas').name, 'tugas')
 
-#------------------------------------------------------------------------------ CONTENT TESTING --------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------ CONTENT TESTING --------------------------------------------------------------------------
 
     def testHomePageContainsPreviousText(self):
         response = Client().get('/')
@@ -153,13 +141,13 @@ class GroupAssignmentUnitTest (TestCase):
         response = Client().get('/')
         response_content = response.content.decode('utf-8')
         self.assertIn("Next", response_content)
-    
+
     def testHomePageContainsElement(self):
         response = Client().get('/about/')
         response_content = response.content.decode('utf-8')
         self.assertIn("About", response_content)
-    
-#------------------------------------------------------------------------------ MODEL TESTING --------------------------------------------------------------------------
+
+    # ------------------------------------------------------------------------------ MODEL TESTING --------------------------------------------------------------------------
 
     def testModelCreateNewCategory(self): 
         newCategory = Category.objects.create(categoryName='Sporty')
