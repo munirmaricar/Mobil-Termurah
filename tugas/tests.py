@@ -6,8 +6,8 @@ from .views import *
 from .models import *
 from .forms import *
 
-#class GroupAssignmentUnitTest (TestCase):
 
+    
 #-------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
 class tests (TestCase):
     def testHomePageURL(self):
@@ -16,16 +16,6 @@ class tests (TestCase):
 
     def testCarsPageURL(self):
         response = Client().get('/cars/')
-        self.assertEqual(response.status_code, 200)
-
-    def testCarsViewPageURL(self, newCar):
-        newCategory = Category.objects.create(categoryName='Luxury')
-        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
-        response = Client().get('/CarsView/')
-        self.assertEqual(response.status_code, 200)
-
-    def testFindCarPageURL(self):
-        response = Client().get('/findCar/')
         self.assertEqual(response.status_code, 200)
 
     def testRentFormPageURL(self):
@@ -39,10 +29,6 @@ class tests (TestCase):
     def testArticleFormPageURL(self):
         response = Client().get('/ArticleForm/')
         self.assertEqual(response.status_code, 200)
-
-    def testChooseArticlePageURL(self):
-        response = Client().get('/chooseArticle/')
-        self.assertEqual(response.status_code, 200)  
 
     def testAboutPageURL(self):
         response = Client().get('/about/')
@@ -58,10 +44,6 @@ class tests (TestCase):
         response = Client().get('/cars/')
         self.assertTemplateUsed(response, 'pages/cars.html')
 
-    def testFindCarPageUsingTemplate(self):
-        response = Client().get('/findCar/')
-        self.assertTemplateUsed(response, 'pages/findCar.html')
-
     def testRentFormPageUsingTemplate(self):
         response = Client().get('/RentForm/')
         self.assertTemplateUsed(response, 'pages/rentForm.html')
@@ -73,10 +55,6 @@ class tests (TestCase):
     def testArticleFormPageUsingTemplate(self):
         response = Client().get('/ArticleForm/')
         self.assertTemplateUsed(response, 'pages/articleForm.html')
-
-    def testChooseArticlePageUsingTemplate(self):
-        response = Client().get('/chooseArticle/')
-        self.assertTemplateUsed(response, 'pages/chooseArticle.html')
 
     def testAboutPageUsingTemplate(self):
         response = Client().get('/about/')
@@ -91,10 +69,6 @@ class tests (TestCase):
     def testCarsPageUsingFunction(self):
         found = resolve('/cars/')
         self.assertEqual(found.func, cars)
-
-    def testCarsViewPageUsingFunction(self):
-        found = resolve('/CarsView/')
-        self.assertEqual(found.func, carsView)
 
     def testFindCarPageUsingFunction(self):
         found = resolve('/findCar/')
@@ -160,24 +134,10 @@ class tests (TestCase):
         numberOfCars= Category.objects.all().count()
         self.assertEqual(numberOfCars, 1)
 
-    def testModelCreateNewTransaction(self): 
-        newCategory = Category.objects.create(categoryName='Luxury')
-        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
-        newTransaction = Transaction.objects.create(carName=newCar)
-        numberOfTransactions = Transaction.objects.all().count()
-        self.assertEqual(numberOfTransactions, 1)
-
     def testModelCreateNewArticle(self): 
         newArticle = Article.objects.create(articleTitle='Rising Demand of Electric Vehicles', articleContent='This is because of environmental concerns')
         numberOfArticles = Article.objects.all().count()
         self.assertEqual(numberOfArticles, 1)
-
-    def testModelCreateNewReview(self): 
-        newCategory = Category.objects.create(categoryName='Luxury')
-        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
-        newReview = Review.objects.create(carName=newCar, carReview='Highly recommend this car to anybody who is rich!')
-        numberOfReviews = Review.objects.all().count()
-        self.assertEqual(numberOfReviews, 1)
 
     def testModelCategoryReturnsString(self):
         newCategory = Category.objects.create(categoryName='Sporty')
