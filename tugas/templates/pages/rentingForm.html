@@ -17,9 +17,10 @@
 	<div class="row" style="text-align: center;"">
 		<div class="container">
 			<form method="POST" action="{%url 'sendRentingForm' car.id%}">{% csrf_token %}
-			<input type="text" name="transactionDuration" placeholder="Put your duration here [ in day ]"
-			style="width: 500px;">
-			<br>		
+			<div class="d-flex justify-content-center">
+				<input class="form-control" type="text" name="transactionDuration" placeholder="Put your duration here [ in day ]"
+				style="width: 500px;">	
+			</div>		
 			<button id="revbutton" class="btn btn-large btn-primary mt-3" onclick="document.form.submit()">
 				Rent it now
 			</button>

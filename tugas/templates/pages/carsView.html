@@ -68,13 +68,16 @@
         <!-- Modal body -->
         <div class="modal-body">
           <form method="POST" action="{%url 'sendReviewForm' car.id%}">{% csrf_token %}
-            <h2 style="color: #518384;">Write your review:</h2>
-            <input type="text" name="carReview">
-            <br> <br>
-            <h2 style="color: #518384;">Please rate this car</h2>
-            <input type="number" name="carRating" min="1" max="5">
-            <br><br>
-			<input type='submit' value="SUBMIT" style="background-color: #518384; color: white;">
+            <div class="form-group">
+                <label style="color: #518384;">Write your review:</label>
+                <input class="form-control" type="text" name="carReview">
+            </div>  
+            <div class="form-group">
+                <label style="color: #518384;">Please rate this car</label>
+                <input class="form-control" type="number" name="carRating" min="1" max="5">    
+            </div>
+           
+			<input type='submit' value="SUBMIT" style="background-color: #518384; color: white;" class="btn btn-primary">
 		  </form>
         </div>
   
