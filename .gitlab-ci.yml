@@ -2,7 +2,7 @@ stages:
   - test
   - deploy
 
-UnitTest:
+Testing:
   image: python:3.6
   stage: test
   before_script:
@@ -23,7 +23,7 @@ UnitTest:
     - coverage run manage.py test
     - coverage report -m
 
-publish:
+Deployment:
   type: deploy
   script:
     - apt-get update -qy
