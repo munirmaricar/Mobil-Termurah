@@ -34,6 +34,10 @@ class tests (TestCase):
         response = Client().get('/about/')
         self.assertEqual(response.status_code, 200)
 
+    def testRegisterURL(self):
+        response = Client().get('/register')
+        self.assertEqual(response.status_code,200)
+
     # ------------------------------------------------------------------------------ TEMPLATE TESTING -------------------------------------------------------------------------
 
     def testHomePageUsingTemplate(self):
@@ -59,6 +63,10 @@ class tests (TestCase):
     def testAboutPageUsingTemplate(self):
         response = Client().get('/about/')
         self.assertTemplateUsed(response, 'pages/about.html')
+
+    def testRegisterURL(self):
+        response = Client().get('/register')
+        self.assertTemplateUsed(response, 'pages/register.html')
 
     # ------------------------------------------------------------------------------ FUNCTION TESTING -------------------------------------------------------------------------
 

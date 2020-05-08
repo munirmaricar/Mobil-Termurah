@@ -87,6 +87,13 @@ def articles(request):
 #
 # View for sending an article
 #
+def jsonWithDjango(request):
+    data = {
+        'name':'Bob',
+        'role':'Manager',
+        'age':'28'
+    }
+    return JsonResponse(data)
 def sendArticleForm(request):
     #
     # Retrieve all the queries
