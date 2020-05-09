@@ -259,3 +259,7 @@ input#sub {
 input#sub:hover {
   border: none;
 }
+
+.navbar-light .navbar-nav .register{  
+  margin-right: 10px;
+}
