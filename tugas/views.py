@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .forms import RegistrationForm
 #
 # Import regex module for the search function
 #
@@ -87,13 +88,6 @@ def articles(request):
 #
 # View for sending an article
 #
-def jsonWithDjango(request):
-    data = {
-        'name':'Bob',
-        'role':'Manager',
-        'age':'28'
-    }
-    return JsonResponse(data)
 def sendArticleForm(request):
     #
     # Retrieve all the queries
@@ -255,3 +249,14 @@ def sendReviewForm(request, pk):
     # Redirect to cars.html
     #
     return redirect('cars')
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = RegistrationForm()
+    return render(request, 'pages/register.html',{'form' : form})
+    

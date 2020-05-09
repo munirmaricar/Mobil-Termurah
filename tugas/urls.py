@@ -19,7 +19,8 @@ urlpatterns = [
     path(r'rentingForm/(?P<pk>\d+)/$',views.rentingForm,name='rentingForm'),
     path(r'sendRentingForm/(?P<pk>\d+)/$',views.sendRentingForm,name='sendRentingForm'),
     path('listOfTransaction/', views.transaction, name='listOfTransaction'),
-    path(r'sendReviewForm/(?P<pk>\d+)/$',views.sendReviewForm,name='sendReviewForm')
+    path(r'sendReviewForm/(?P<pk>\d+)/$',views.sendReviewForm,name='sendReviewForm'),
+    path('register/',views.register, name='register'),
 ]
 
 if settings.DEBUG:

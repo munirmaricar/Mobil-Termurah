@@ -35,6 +35,32 @@
           <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'findCar' %}">{% csrf_token %}
             <input name="carName" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           </form>
+          <ul class="navbar-nav pull-left">
+              {% if user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navAbout" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{user.username}}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Favorite Car</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Transaction History</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Reviews</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{%url 'logout'%}">Log Out</a>
+                </div>
+              </li>
+
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link register" href="{%url 'login'%}">Login</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link register" href="{%url 'register'%}">Register</a>
+              </li>
+              {% endif %}
+          </ul>
         </div>
       </nav>
 
