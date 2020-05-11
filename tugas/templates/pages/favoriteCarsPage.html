@@ -37,6 +37,14 @@
 								{% endif %}
 							</h2>
 							<h2 style="font-size: 15px;"><i class="fas fa-star"></i> {{car.carRating}} </h2>
+                        	<form method='POST' action="{% url 'favouriteCar' car.id %}">
+                           		{% csrf_token %}
+                            	<input type='hidden'>
+								<button type='submit' class="btn" 
+								style="background-color: #518384;
+                            	color: white;
+                            	border: none; border-radius: 5px; font-size: 10px;"> 💔 Remove</button>
+                        	</form>
 						</div>
 					</div>
 				</a> 
