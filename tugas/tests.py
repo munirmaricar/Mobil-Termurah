@@ -129,7 +129,7 @@ class tests (TestCase):
     def testFavoriteThisCarFunction(self):
         newCategory = Category.objects.create(categoryName='Luxury')
         newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
-        found = resolve('/favoriteCar/(?P<1>\d+)/$')
+        found = resolve('/favouriteCar/(?P<1>\d+)/$')
         self.assertEqual(found.func, favouriteCar)
 
     # -------------------------------------------------------------------------------- APP TESTING ----------------------------------------------------------------------------
