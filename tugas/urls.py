@@ -21,6 +21,7 @@ urlpatterns = [
     path('listOfTransaction/', views.transaction, name='listOfTransaction'),
     path(r'sendReviewForm/(?P<pk>\d+)/$',views.sendReviewForm,name='sendReviewForm'),
     path('register/',views.register, name='register'),
+    path(r'favouriteCar/(?P<pk>\d+)/$',views.favouriteCar,name='favouriteCar'),
 ]
 
 if settings.DEBUG:
