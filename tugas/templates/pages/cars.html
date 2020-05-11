@@ -54,51 +54,5 @@
 		</div>
       </div>
 	</div>
-	{% if user.is_authenticated %}
-	<div class="row">
-		<div class="col"></div>
-		<div class="col">
-		<br><br>
-		  <h1 style="text-align: center;">YOUR FAVORITE CARS</h1>
-		</div>
-		<div class="col"></div>
-	</div>
-	<div class="row">
-		<div class="col"></div>
-		<div class="col" style="text-align: center;">
-			<br>
-		  	{% for car in user.favourite_car.all %}
-			  <div class="carbox" style="height: 150px; width: 350px;">
-				<a href="{%url 'carsView' car.id%}">
-					<div class="row">
-						<div class="col-sm-7">
-							<img src="{{car.carImage.url}}" alt="car1" style="height: 100px; width: 170px;">
-						</div>
-						<div class="col-sm-5">
-							<h2 id="carname" style="font-size: 15px;">
-								<b>{{car.carName}}</b>
-							</h2>
-							<h2 style="font-size: 15px;">
-								{% if car.carPrice|length >= 5 and car.carPrice|length < 7 %}
-									Rp.{{car.carPrice|slice:":3"}}rb/day
-								{% elif car.carPrice|length >= 7 %}
-									Rp.{{car.carPrice|slice:":1"}}jt/day
-								{% endif %}
-							</h2>
-							<h2 style="font-size: 15px;"><i class="fas fa-star"></i> {{car.carRating}} </h2>
-						</div>
-					</div>
-				</a> 
-			</div>
-	  		{% empty %}
-		  		<h2>You have no favourite car at this moment</h2>
-	  		{% endfor %}
-			<br><br>
-		</div>
-		<div class="col"></div>
-	</div>
-	{% else %}
-	<h2>Sign in to unlock the favorite car feature!</h2>
-	{% endif %}
   </div>
 {% endblock %}

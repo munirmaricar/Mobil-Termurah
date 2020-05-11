@@ -272,4 +272,15 @@ def favouriteCar(request, pk):
             car.favourite.remove(request.user)
         else:
             car.favourite.add(request.user)
-    return redirect('cars')
+    return redirect('favoriteCarsPage')
+
+def favoriteCarsPage(request):
+    cars = Car.objects.all()
+    for car in cars:
+        review = list(filter(lambda review : review.carName == car, Review.objects.all()))
+        ratings = list(map(lambda review : review.carRating, review))
+        car.carRating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
+    response = {
+        'cars' : cars,
+    }
+    return render(request, 'pages/favoriteCarsPage.html', response)

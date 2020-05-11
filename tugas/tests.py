@@ -39,8 +39,8 @@ class tests (TestCase):
         self.assertEqual(response.status_code,200)
 
     def testSeeFavoriteCarPage(self):
-        response = response = Client().get('/FavoriteCarPage')
-        self.assertEqual(response.status_code,200)
+        response = response = Client().get('/favoriteCarsPage')
+        self.assertEqual(response.status_code,301)
 
     # ------------------------------------------------------------------------------ TEMPLATE TESTING -------------------------------------------------------------------------
 
@@ -69,12 +69,12 @@ class tests (TestCase):
         self.assertTemplateUsed(response, 'pages/about.html')
 
     def testRegisterURL(self):
-        response = Client().get('/register')
+        response = Client().get('/register/')
         self.assertTemplateUsed(response, 'pages/register.html')
 
     def testSeeFavoriteCarPageTemplate(self):
-        response = Client().get('/FavoriteCarPage')
-        self.assertTemplateUsed(response, 'pages/favoritecarpage.html')
+        response = Client().get('/favoriteCarsPage/')
+        self.assertTemplateUsed(response, 'pages/favoriteCarsPage.html')
 
     # ------------------------------------------------------------------------------ FUNCTION TESTING -------------------------------------------------------------------------
 
@@ -115,8 +115,8 @@ class tests (TestCase):
         self.assertEqual(found.func, about)
 
     def testFavoriteCarPageFunction(self):
-        found = resolve('/FavoriteCarPage/')
-        self.assertEqual(found.func, favoriteCarPage)
+        found = resolve('/favoriteCarsPage/')
+        self.assertEqual(found.func, favoriteCarsPage)
 
     # -------------------------------------------------------------------------------- APP TESTING ----------------------------------------------------------------------------
 
