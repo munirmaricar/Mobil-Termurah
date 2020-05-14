@@ -1,4 +1,4 @@
-from django.test import TestCase, Client
+from django.test import TestCase, Client, LiveServerTestCase
 from django.urls import resolve, reverse
 from django.apps import apps
 from .apps import *
@@ -6,9 +6,8 @@ from .views import *
 from .models import *
 from .forms import *
 
-
     
-#-------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
+# -------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
 class tests (TestCase):
 
     def testHomePageURL(self):
@@ -155,6 +154,11 @@ class tests (TestCase):
         response_content = response.content.decode('utf-8')
         self.assertIn("About", response_content)
 
+    def testCarsPageContainsElement(self):
+        response = Client().get('/cars/')
+        response_content = response.content.decode('utf-8')
+        self.assertIn("Categories", response_content)
+
     # ------------------------------------------------------------------------------ MODEL TESTING --------------------------------------------------------------------------
 
     def testModelCreateNewCategory(self): 
@@ -185,3 +189,19 @@ class tests (TestCase):
     def testModelArticleReturnsString(self):
         newArticle = Article.objects.create(articleTitle='Rising Demand of Electric Vehicles', articleContent='This is because of environmental concerns')
         self.assertEqual(str(newArticle), newArticle.articleTitle)
+
+    def testModelFavoriteThisCar(self): 
+        newUser = User.objects.create_user('groupk3', 'groupk3@mail.com', 'password')
+        newUser.last_name = 'ppw'
+        newUser.save()
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
+        self.assertEqual(newCar.favourite.all().count(), 0)
+        newCar.favourite.add(newUser)
+        self.assertEqual(newCar.favourite.get(id=newUser.id), newUser)
+        response = Client().get('/cars/')
+        response_content = response.content.decode('utf-8')
+        self.assertIn('No rating', response_content)
+        response = Client().get('/favoriteCarsPage/')
+        response_content = response.content.decode('utf-8')
+        self.assertIn('No rating', response_content)
