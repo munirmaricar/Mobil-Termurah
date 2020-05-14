@@ -9,13 +9,7 @@ crayons==0.3.0
 cryptography==2.9.2
 defusedxml==0.7.0rc1
 dj-database-url==0.5.0
-<<<<<<< HEAD
 Django==2.2
-=======
-Django==2.1.5
-django-heroku==0.3.1
-django-widget-tweaks==1.4.8
->>>>>>> 8821447f1d12f239a7ef767b4df37eeb198eb3b2
 gunicorn==19.8.1
 heroku==0.1.4
 idna==2.9
@@ -39,9 +33,6 @@ sqlparse==0.3.0
 urllib3==1.25.8
 webdriver-manager==2.3.0
 whitenoise==3.3.1
-<<<<<<< HEAD
 pillow
 coverage
 social-auth-app-django
-=======
->>>>>>> 8821447f1d12f239a7ef767b4df37eeb198eb3b2
