@@ -36,7 +36,7 @@ class tests (TestCase):
         self.assertEqual(response.status_code, 200)
 
     def testRegisterURL(self):
-        response = Client().get('/register')
+        response = Client().get('/register/')
         self.assertEqual(response.status_code,200)
 
     def testSeeFavoriteCarPage(self):
