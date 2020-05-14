@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from django.urls import resolve
+from django.urls import resolve, reverse
 from django.apps import apps
 from .apps import *
 from .views import *
@@ -10,6 +10,7 @@ from .forms import *
     
 #-------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
 class tests (TestCase):
+
     def testHomePageURL(self):
         response = Client().get('')
         self.assertEqual(response.status_code, 200)
@@ -37,6 +38,17 @@ class tests (TestCase):
     def testRegisterURL(self):
         response = Client().get('/register/')
         self.assertEqual(response.status_code,200)
+
+    def testSeeFavoriteCarPage(self):
+        response = response = Client().get('/favoriteCarsPage')
+        self.assertEqual(response.status_code,301)
+
+    def testFavoriteThisCar(self):
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
+        url = reverse('favouriteCar', kwargs={'pk': 1})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 302)
 
     # ------------------------------------------------------------------------------ TEMPLATE TESTING -------------------------------------------------------------------------
 
@@ -67,6 +79,10 @@ class tests (TestCase):
     def testRegisterURL(self):
         response = Client().get('/register/')
         self.assertTemplateUsed(response, 'pages/register.html')
+
+    def testSeeFavoriteCarPageTemplate(self):
+        response = Client().get('/favoriteCarsPage/')
+        self.assertTemplateUsed(response, 'pages/favoriteCarsPage.html')
 
     # ------------------------------------------------------------------------------ FUNCTION TESTING -------------------------------------------------------------------------
 
@@ -105,6 +121,16 @@ class tests (TestCase):
     def testAboutPageUsingFunction(self):
         found = resolve('/about/')
         self.assertEqual(found.func, about)
+
+    def testFavoriteCarPageFunction(self):
+        found = resolve('/favoriteCarsPage/')
+        self.assertEqual(found.func, favoriteCarsPage)
+
+    def testFavoriteThisCarFunction(self):
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
+        found = resolve('/favouriteCar/(?P<1>\d+)/$')
+        self.assertEqual(found.func, favouriteCar)
 
     # -------------------------------------------------------------------------------- APP TESTING ----------------------------------------------------------------------------
 

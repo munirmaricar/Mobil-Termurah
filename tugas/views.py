@@ -71,7 +71,12 @@ def carsView(request, pk):
     ratings = list(map(lambda review : review.carRating, review))
     rating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
     print(rating)
-    response = {'car' : car , 'reviews' : review, 'rating' : rating}
+
+    is_favourite = False
+    if car.favourite.filter(id=request.user.id).exists():
+        is_favourite = True
+
+    response = {'car' : car , 'reviews' : review, 'rating' : rating, 'is_favourite' : is_favourite}
     return render(request, 'pages/carsView.html', response)
 #
 # View for articles.html
@@ -260,3 +265,22 @@ def register(request):
         form = RegistrationForm()
     return render(request, 'pages/register.html',{'form' : form})
     
+def favouriteCar(request, pk):
+    car = Car.objects.get(id=pk)
+    if request.method == 'POST':
+        if car.favourite.filter(id=request.user.id).exists():
+            car.favourite.remove(request.user)
+        else:
+            car.favourite.add(request.user)
+    return redirect('favoriteCarsPage')
+
+def favoriteCarsPage(request):
+    cars = Car.objects.all()
+    for car in cars:
+        review = list(filter(lambda review : review.carName == car, Review.objects.all()))
+        ratings = list(map(lambda review : review.carRating, review))
+        car.carRating = int(sum(ratings)/len(review)) if len(review) > 0 else 0
+    response = {
+        'cars' : cars,
+    }
+    return render(request, 'pages/favoriteCarsPage.html', response)

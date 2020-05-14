@@ -28,6 +28,28 @@
 							Rent Car
 						</button>
                     </form>
+                    <br>
+                    {% if user.is_authenticated %}
+                        {% if is_favourite %}
+                        <form method='POST' action="{% url 'favouriteCar' car.id %}">
+                            {% csrf_token %}
+                            <input type='hidden'>
+                            <button type='submit' class="btn" style="background-color: #518384;
+                            color: white;
+                            border: none; border-radius: 5px;"> 💔 Remove from Favorite</button>
+                        </form>
+                        {% else %}
+                        <form method='POST' action="{% url 'favouriteCar' car.id %}">
+                            {% csrf_token %}
+                            <input type='hidden'>
+                            <button type='submit' class="btn" style="background-color: #518384;
+                            color: white;
+                            border: none; border-radius: 5px;"> ♥️ Add to Favorite</button>
+                        </form>
+                        {% endif %}
+                    {% else %}
+                    <h2>Sign In to Favorite This Car!</h2>
+                    {% endif %}
                 </div>
             </div>
         </div>

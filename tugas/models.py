@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -21,6 +22,7 @@ class Car(models.Model):
     carDescription = models.CharField(max_length=1000)
     carImage = models.ImageField(upload_to= 'media/', default = 'static/img/Car.png')
     carRating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)])
+    favourite = models.ManyToManyField(User, related_name="favourite_car", blank=True)
 
     def __str__(self):
         return self.carName
