@@ -35,7 +35,7 @@ class tests (TestCase):
         self.assertEqual(response.status_code, 200)
 
     def testRegisterURL(self):
-        response = Client().get('/register')
+        response = Client().get('/register/')
         self.assertEqual(response.status_code,200)
 
     # ------------------------------------------------------------------------------ TEMPLATE TESTING -------------------------------------------------------------------------
@@ -65,7 +65,7 @@ class tests (TestCase):
         self.assertTemplateUsed(response, 'pages/about.html')
 
     def testRegisterURL(self):
-        response = Client().get('/register')
+        response = Client().get('/register/')
         self.assertTemplateUsed(response, 'pages/register.html')
 
     # ------------------------------------------------------------------------------ FUNCTION TESTING -------------------------------------------------------------------------
