@@ -237,7 +237,7 @@ class GAFunctionalTest(LiveServerTestCase):
         self.driver.get(self.live_server_url)
         response_page = self.driver.page_source
 
-        time.sleep(10)
+        time.sleep(5)
         self.driver.find_element_by_name('LogIn').click()
         time.sleep(5)
 
