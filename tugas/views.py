@@ -1,13 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import RegistrationForm
-#
-
-#This is the django module which allows the Django object to become JSON
 from django.core import serializers
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-
 # Import regex module for the search function
 #
 import re
