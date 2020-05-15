@@ -327,25 +327,25 @@ class GAFunctionalTest(LiveServerTestCase):
         response_page = self.driver.page_source
         self.assertIn('We have various cars for rent', response_page)
 
-    def testRentYourCarNow(self):
-        self.driver.get(self.live_server_url)
-        response_page = self.driver.page_source
+    # def testRentYourCarNow(self):
+    #     self.driver.get(self.live_server_url)
+    #     response_page = self.driver.page_source
 
-        time.sleep(5)
-        self.driver.find_element_by_name('rentyourcar').click()
-        time.sleep(2)
+    #     time.sleep(5)
+    #     self.driver.find_element_by_name('rentyourcar').click()
+    #     time.sleep(2)
 
-        self.driver.find_element_by_id('nameinput').send_keys('Mercedez Benz')
-        self.driver.find_element_by_name('carCategory').click()
-        self.driver.find_element_by_name('categoryopt').click()
-        self.driver.find_element_by_name('carYear').send_keys('2020')
-        self.driver.find_element_by_name('carCity').send_keys('Jakarta')
-        self.driver.find_element_by_name('carDescription').send_keys('A car')
-        self.driver.find_element_by_name('carPrice').send_keys('600000')
-        self.driver.find_element_by_name('carImage').send_keys('static/img/car.png')
-        time.sleep(2)
-        self.driver.find_element_by_name('rentmycar').click()
+    #     self.driver.find_element_by_id('nameinput').send_keys('Mercedez Benz')
+    #     self.driver.find_element_by_name('carCategory').click()
+    #     self.driver.find_element_by_name('categoryopt').click()
+    #     self.driver.find_element_by_name('carYear').send_keys('2020')
+    #     self.driver.find_element_by_name('carCity').send_keys('Jakarta')
+    #     self.driver.find_element_by_name('carDescription').send_keys('A car')
+    #     self.driver.find_element_by_name('carPrice').send_keys('600000')
+    #     self.driver.find_element_by_name('carImage').send_keys('static/img/car.png')
+    #     time.sleep(2)
+    #     self.driver.find_element_by_name('rentmycar').click()
 
-        carname = self.driver.find_elements_by_name('carname')
-        time.sleep(2)
-        self.assertIn('Sienta', carname)
+    #     carname = self.driver.find_elements_by_name('carname')
+    #     time.sleep(2)
+    #     self.assertIn('Sienta', carname)
