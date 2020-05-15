@@ -45,7 +45,7 @@ def findCar(request):
         carTarget2 = filter(lambda car: re.search(pattern2, car.carPrice), cars)
         for car in carTarget2:
             carFoundList.append(car)
-    if re.search(pattern3, target):
+    elif re.search(pattern3, target):
         carTarget3 = filter(lambda car: re.search(pattern2, str(car.carCategory)), cars)
         for car in carTarget3:
             carFoundList.append(car)
