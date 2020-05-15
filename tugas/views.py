@@ -35,9 +35,16 @@ def findCar(request):
     #
     # Use lambda to find the cars
     #
+    carFoundList = []
     carTarget = filter(lambda car: re.search(pattern, car.carName), cars)
+    if re.search(re.compile('[0-9]*'), target):
+        carTarget2 = filter(lambda car: re.search(pattern, car.carPrice), cars)
+        for car in carTarget2:
+            carFoundList.appen(car)
+    for car in carTarget:
+        carFoundList.append(car)
     response = {
-        'cars' : carTarget,
+        'cars' : carFoundList,
     }
     return render(request, 'pages/carResult.html', response)
 #
