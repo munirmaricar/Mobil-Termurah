@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-#
+
+#This is the django module which allows the Django object to become JSON
+from django.core import serializers
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 # Import regex module for the search function
 #
 import re
@@ -121,7 +126,8 @@ def chooseArticle(request):
         if target == article.articleTitle:
             response = {
                 'title' : article.articleTitle,
-                'content' : article.articleContent
+                'content' : article.articleContent,
+                'rating' : article.articleRating,
             }
     return render(request, 'pages/articleResult.html', response)
 #
@@ -248,3 +254,22 @@ def sendReviewForm(request, pk):
     # Redirect to cars.html
     #
     return redirect('cars')
+
+def convertToJSON(request):
+    articles = Article.objects.all()
+    results = []
+    for article in articles:
+        results.append({'articleTitle' : article.articleTitle, 'articleRating' : article.articleRating, 'totalRatings' : article.totalRatings, 'sumOfRatings' : article.sumOfRatings})
+    return JsonResponse({'articles' : results})
+
+def updateArticleRatings(request):
+    title =request.POST['articleTitle']
+    article = Article.objects.get(articleTitle = title)
+    newRating = request.POST['newRating']
+    article.totalRatings = article.totalRatings + 1
+    article.articleRating = ((article.sumOfRatings  + int(newRating))) / (article.totalRatings)
+    article.sumOfRatings = article.sumOfRatings + int(newRating)
+    article.save()
+    return JsonResponse({
+        'success' : True
+    })

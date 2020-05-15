@@ -30,8 +30,11 @@ class Transaction(models.Model):
     transactionDuration = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1)])
     
 class Article(models.Model):
-    articleTitle = models.CharField(max_length=60)
+    articleTitle = models.CharField(primary_key=True, max_length=60)
     articleContent = models.CharField(max_length=10000)
+    articleRating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)])
+    totalRatings = models.PositiveIntegerField(default=0)
+    sumOfRatings = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.articleTitle
