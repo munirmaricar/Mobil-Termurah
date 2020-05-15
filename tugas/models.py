@@ -20,7 +20,7 @@ class Car(models.Model):
     carCity = models.CharField(max_length=50)
     carPrice = models.CharField(max_length=15)
     carDescription = models.CharField(max_length=1000)
-    carImage = models.ImageField(upload_to= 'media/', default = 'static/img/Car.png')
+    carImage = models.ImageField(upload_to= 'media/')
     carRating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)])
     favourite = models.ManyToManyField(User, related_name="favourite_car", blank=True)
 

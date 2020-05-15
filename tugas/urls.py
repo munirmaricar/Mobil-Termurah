@@ -25,6 +25,7 @@ urlpatterns = [
     path('register/',views.register, name='register'),
     path(r'favouriteCar/(?P<pk>\d+)/$',views.favouriteCar,name='favouriteCar'),
     path('favoriteCarsPage/',views.favoriteCarsPage, name='favoriteCarsPage'),
+    path('transactions/',views.transaction, name='transactions'),
 ]
 
 if settings.DEBUG:
