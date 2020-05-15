@@ -11,9 +11,11 @@ urlpatterns = [
     path('RentForm/',views.rentForm,name='rentForm'),
     path('sendRentForm/', views.sendRentForm, name='sendRentForm'),
     path('articles/',views.articles,name='articles'),
+    path('articlesjson/',views.convertToJSON,name='convertToJSON'),
+    path('chooseArticle/', views.chooseArticle, name='chooseArticle'),
+    path('chooseArticleSubmitRating/', views.updateArticleRatings, name='updateArticleRatings'),
     path('ArticleForm/',views.articleForm,name='articleForm'),
     path('SendArticleForm/', views.sendArticleForm, name='SendArticleForm'),
-    path('chooseArticle/', views.chooseArticle, name='chooseArticle'),
     path('about/',views.about,name='about'),
     path('searchByCategory/', views.searchByCategory, name='searchByCategory'),
     path(r'rentingForm/(?P<pk>\d+)/$',views.rentingForm,name='rentingForm'),
@@ -23,6 +25,7 @@ urlpatterns = [
     path('register/',views.register, name='register'),
     path(r'favouriteCar/(?P<pk>\d+)/$',views.favouriteCar,name='favouriteCar'),
     path('favoriteCarsPage/',views.favoriteCarsPage, name='favoriteCarsPage'),
+    path('transactions/',views.transaction, name='transactions'),
 ]
 
 if settings.DEBUG:

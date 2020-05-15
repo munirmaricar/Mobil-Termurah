@@ -21,7 +21,7 @@ Testing:
     - python manage.py runserver 8000 &
   when: on_success
   script:
-    - coverage run manage.py test
+    - coverage run --include='tugas/*' manage.py test
     - coverage report -m
 
 Deployment:
