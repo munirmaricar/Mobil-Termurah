@@ -6,21 +6,29 @@
     <div class="row">
         <h1 style="margin-left: 20px; color: #518384;"> <b>Latest</b></h1> <br>
         <div class="col-md-12">
-        <div class="row">
-        {% for article in articles %}
-        <div class="col-md-4">
-                <div class="articlebox">
-                    <form method='POST' action="{% url 'chooseArticle' %}">{% csrf_token %}
-                        <h1 id="articleTitle">{{article.articleTitle}}</h1>
+            <div class="row">
+                {% for article in articles %}
+                <div class="col-md-4">
+                    <div class="articlebox">
+                        <form method='POST' action="{% url 'chooseArticle' %}">{% csrf_token %}
+                            <h1 id="articleTitle">{{article.articleTitle}}</h1>
+                            <br>
+                            <button style="background-color: #518384; color: white;" class="btn"
+                                id="seeArticle{{article.articleTitle}}" name='articleTitle'
+                                value='{{article.articleTitle}}' onclick='document.form.submit()'>
+                                See Article
+                            </button>
+                        </form>
                         <br>
-                        <button style="background-color: #518384; color: white;" class="btn" name='articleTitle' value='{{article.articleTitle}}' onclick='document.form.submit()'>
-                            See Article 
-                         </button>
-                     </form>
+                        {% if article.articleRating == 0 %}
+                        <h2><i class="fas fa-star"></i> No Rating</h2>
+                        {% else %}
+                        <h2><i class="fas fa-star"></i> {{article.articleRating}}</h2>
+                        {% endif %}
+                    </div>
                 </div>
-        </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
     <div class="row"><br></div>
@@ -29,9 +37,10 @@
         <div class="col-10" style="text-align: center;">
             <br>
             <h1 style="font-size: 25px; color: #518384;">Got some ideas? Submit your own article!</h1>
-            <a href="{% url 'articleForm' %}" name="submitarticlebtn" class="btn btn-primary" style="text-decoration: none; background-color: #518384; border: none;"> 
+            <a href="{% url 'articleForm' %}" class="btn btn-primary"
+                style="text-decoration: none; background-color: #518384; border: none;" id="submitAnArticle">
                 Submit an Article </a>
-                <br><br>
+            <br><br>
         </div>
         <div class="col"></div>
     </div>
@@ -39,4 +48,3 @@
 
 
 {% endblock %}
-

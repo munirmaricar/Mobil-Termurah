@@ -9,11 +9,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import time
 
 # -------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
-class tests (TestCase):
+class UnitTesting (TestCase):
 
     def testHomePageURL(self):
         response = Client().get('')
@@ -212,16 +211,21 @@ class tests (TestCase):
         response_content = response.content.decode('utf-8')
         self.assertIn("4", response_content)
 
-class GAFunctionalTest(LiveServerTestCase):
+# class GAFunctionalTest(LiveServerTestCase):
+#     def setUp(self):
+#         newUser = User.objects.create_user('groupk3', 'groupk3@mail.com', 'password')
+#         newUser.last_name = 'ppw'
+#         newUser.save()
+#         newCategory = Category.objects.create(categoryName='Luxury')
+#         newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png',carRating='4')
+#         super().setUp()
+#         chrome_options = webdriver.ChromeOptions()
+#         # self.driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
+
+class FunctionalTesting(LiveServerTestCase):
     def setUp(self):
-        newUser = User.objects.create_user('groupk3', 'groupk3@mail.com', 'password')
-        newUser.last_name = 'ppw'
-        newUser.save()
-        newCategory = Category.objects.create(categoryName='Luxury')
-        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png',carRating='4')
         super().setUp()
         chrome_options = webdriver.ChromeOptions()
-        # self.driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
@@ -314,49 +318,49 @@ class GAFunctionalTest(LiveServerTestCase):
         carname = self.driver.find_elements_by_id('carname')
         self.assertIn('ALPHARD', carname[0].text)
 
-    def testSubmitAnArticleThenSeeArticle(self):
-        self.driver.get(self.live_server_url)
-        response_page = self.driver.page_source
-
-        time.sleep(5)
-        self.driver.find_element_by_name('Article').click()
-        time.sleep(2)
-
-        self.driver.find_element_by_name('submitarticlebtn').click()
-
-        self.driver.find_element_by_name('articleTitle').send_keys('MobilTermurah Article')
-        self.driver.find_element_by_name('articleContent').send_keys('We have various cars for rent')
-        time.sleep(2)
-        self.driver.find_element_by_name('submitarticle').click()
-
-        response_page = self.driver.page_source
-        time.sleep(2)
-        articleTitle = self.driver.find_elements_by_id('articleTitle')
-        self.assertIn('MobilTermurah Article', articleTitle[0].text)
-
-        self.driver.find_element_by_name('articleTitle').click()
-        response_page = self.driver.page_source
-        self.assertIn('We have various cars for rent', response_page)
-
-    # def testRentYourCarNow(self):
+    # def testSubmitAnArticleThenSeeArticle(self):
     #     self.driver.get(self.live_server_url)
     #     response_page = self.driver.page_source
 
     #     time.sleep(5)
-    #     self.driver.find_element_by_name('rentyourcar').click()
+    #     self.driver.find_element_by_name('Article').click()
     #     time.sleep(2)
 
-    #     self.driver.find_element_by_id('nameinput').send_keys('Mercedez Benz')
-    #     self.driver.find_element_by_name('carCategory').click()
-    #     self.driver.find_element_by_name('categoryopt').click()
-    #     self.driver.find_element_by_name('carYear').send_keys('2020')
-    #     self.driver.find_element_by_name('carCity').send_keys('Jakarta')
-    #     self.driver.find_element_by_name('carDescription').send_keys('A car')
-    #     self.driver.find_element_by_name('carPrice').send_keys('600000')
-    #     self.driver.find_element_by_name('carImage').send_keys('static/img/car.png')
-    #     time.sleep(2)
-    #     self.driver.find_element_by_name('rentmycar').click()
+    #     self.driver.find_element_by_name('submitarticlebtn').click()
 
-    #     carname = self.driver.find_elements_by_name('carname')
+    #     self.driver.find_element_by_name('articleTitle').send_keys('MobilTermurah Article')
+    #     self.driver.find_element_by_name('articleContent').send_keys('We have various cars for rent')
     #     time.sleep(2)
-    #     self.assertIn('Sienta', carname)
+    #     self.driver.find_element_by_name('submitarticle').click()
+
+    #     response_page = self.driver.page_source
+    #     time.sleep(2)
+    #     articleTitle = self.driver.find_elements_by_id('articleTitle')
+    #     self.assertIn('MobilTermurah Article', articleTitle[0].text)
+
+    #     self.driver.find_element_by_name('articleTitle').click()
+    #     response_page = self.driver.page_source
+    #     self.assertIn('We have various cars for rent', response_page)
+
+    def testIfArticleReviewsAreUpdatedSynchronously(self):
+        self.driver.get('http://127.0.0.1:8000/articles/')
+        self.driver.find_element_by_id("submitAnArticle").click()
+        time.sleep(5)
+        self.driver.find_element_by_id("articleTitle").send_keys("Test")
+        time.sleep(1)
+        self.driver.find_element_by_id("articleContent").send_keys("This is a test article.")
+        time.sleep(1)
+        self.driver.find_element_by_id("submitArticle").click()
+        time.sleep(5)
+        self.driver.find_element_by_id("seeArticleTest").click()
+        time.sleep(5)
+        self.assertEqual("No Rating", self.driver.find_element_by_id("articleRating").text)
+        self.driver.find_element_by_id("ratings").click()
+        self.driver.find_element_by_id("five").click()
+        self.driver.find_element_by_name("submitRatingButton").click()
+        time.sleep(5)
+        self.driver.find_element_by_id("ratings").click()
+        self.driver.find_element_by_id("one").click()
+        self.driver.find_element_by_name("submitRatingButton").click()        
+        time.sleep(5)
+        self.assertEqual("3", self.driver.find_element_by_id("articleRating").text)
