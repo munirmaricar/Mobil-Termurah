@@ -34,12 +34,21 @@ def findCar(request):
     # Create a regex pattern
     #
     pattern = re.compile(target, re.IGNORECASE)
+    pattern2 = re.compile('[0-9]*', re.IGNORECASE)
     #
     # Use lambda to find the cars
     #
+    carFoundList = []
     carTarget = filter(lambda car: re.search(pattern, car.carName), cars)
+    if re.search(pattern2, target):
+        carTarget2 = filter(lambda car: re.search(pattern2, car.carPrice), cars)
+        for car in carTarget2:
+            carFoundList.append(car)
+    for car in carTarget:
+        carFoundList.append(car)
+    carFoundList = list(set(carFoundList))
     response = {
-        'cars' : carTarget,
+        'cars' : carFoundList,
         'categories' : category,
     }
     return render(request, 'pages/carResult.html', response)
