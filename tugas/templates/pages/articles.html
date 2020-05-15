@@ -21,9 +21,9 @@
                         </form>
                         <br>
                         {% if article.articleRating == 0 %}
-                        <h2><i class="fas fa-star"></i> No Rating</h2>
+                        <h2 id="articleRating"><i class="fas fa-star"></i> No Rating</h2>
                         {% else %}
-                        <h2><i class="fas fa-star"></i> {{article.articleRating}}</h2>
+                        <h2 id="articleRating"><i class="fas fa-star"></i> {{article.articleRating}}</h2>
                         {% endif %}
                     </div>
                 </div>
