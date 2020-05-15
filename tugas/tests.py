@@ -38,21 +38,6 @@ class UnitTesting (TestCase):
         response = Client().get('/about/')
         self.assertEqual(response.status_code, 200)
 
-    def testRegisterURL(self):
-        response = Client().get('/register/')
-        self.assertEqual(response.status_code,200)
-
-    def testSeeFavoriteCarPage(self):
-        response = response = Client().get('/favoriteCarsPage')
-        self.assertEqual(response.status_code,301)
-
-    def testFavoriteThisCar(self):
-        newCategory = Category.objects.create(categoryName='Luxury')
-        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
-        url = reverse('favouriteCar', kwargs={'pk': 1})
-        response = self.client.get(url)
-        self.assertEquals(response.status_code, 302)
-
     # ------------------------------------------------------------------------------ TEMPLATE TESTING -------------------------------------------------------------------------
 
     def testHomePageUsingTemplate(self):
@@ -78,14 +63,6 @@ class UnitTesting (TestCase):
     def testAboutPageUsingTemplate(self):
         response = Client().get('/about/')
         self.assertTemplateUsed(response, 'pages/about.html')
-
-    def testRegisterURL(self):
-        response = Client().get('/register/')
-        self.assertTemplateUsed(response, 'pages/register.html')
-
-    def testSeeFavoriteCarPageTemplate(self):
-        response = Client().get('/favoriteCarsPage/')
-        self.assertTemplateUsed(response, 'pages/favoriteCarsPage.html')
 
     # ------------------------------------------------------------------------------ FUNCTION TESTING -------------------------------------------------------------------------
 
@@ -124,16 +101,6 @@ class UnitTesting (TestCase):
     def testAboutPageUsingFunction(self):
         found = resolve('/about/')
         self.assertEqual(found.func, about)
-
-    def testFavoriteCarPageFunction(self):
-        found = resolve('/favoriteCarsPage/')
-        self.assertEqual(found.func, favoriteCarsPage)
-
-    def testFavoriteThisCarFunction(self):
-        newCategory = Category.objects.create(categoryName='Luxury')
-        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
-        found = resolve('/favouriteCar/(?P<1>\d+)/$')
-        self.assertEqual(found.func, favouriteCar)
 
     # -------------------------------------------------------------------------------- APP TESTING ----------------------------------------------------------------------------
 
@@ -194,30 +161,8 @@ class UnitTesting (TestCase):
         newArticle = Article.objects.create(articleTitle='Rising Demand of Electric Vehicles', articleContent='This is because of environmental concerns')
         self.assertEqual(str(newArticle), newArticle.articleTitle)
 
-    def testModelFavoriteThisCar(self): 
-        newUser = User.objects.create_user('groupk3', 'groupk3@mail.com', 'password')
-        newUser.last_name = 'ppw'
-        newUser.save()
-        newCategory = Category.objects.create(categoryName='Luxury')
-        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png',carRating='4')
-        newCar.favourite.add(newUser)
-        self.assertEqual(newCar.favourite.get(id=newUser.id), newUser)
-        newCar.favourite.remove(newUser)
-        self.assertEqual(newCar.favourite.all().count(), 0)
-        response = Client().get('/cars/')
-        response_content = response.content.decode('utf-8')
-        self.assertIn("4", response_content)
-        response = Client().get('/favoriteCarsPage/')
-        response_content = response.content.decode('utf-8')
-        self.assertIn("4", response_content)
-
 class FunctionalTesting(LiveServerTestCase):
     def setUp(self):
-        newUser = User.objects.create_user('groupk3', 'groupk3@mail.com', 'password')
-        newUser.last_name = 'ppw'
-        newUser.save()
-        newCategory = Category.objects.create(categoryName='Luxury')
-        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png',carRating='4')
         super().setUp()
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--no-sandbox')
@@ -232,24 +177,24 @@ class FunctionalTesting(LiveServerTestCase):
         super().tearDown()
 
     def testIfArticleReviewsAreUpdatedSynchronously(self):
-        self.browser.get('http://127.0.0.1:8000/articles/')
-        self.browser.find_element_by_id("submitAnArticle").click()
+        self.driver.get('http://127.0.0.1:8000/articles/')
+        self.driver.find_element_by_id("submitAnArticle").click()
         time.sleep(5)
-        self.browser.find_element_by_id("articleTitle").send_keys("BMW")
+        self.driver.find_element_by_id("articleTitle").send_keys("BMW")
         time.sleep(1)
-        self.browser.find_element_by_id("articleContent").send_keys("They are a manufacturer that produces cars.")
+        self.driver.find_element_by_id("articleContent").send_keys("They are a manufacturer that produces cars.")
         time.sleep(1)
-        self.browser.find_element_by_id("submitArticle").click()
+        self.driver.find_element_by_id("submitArticle").click()
         time.sleep(5)
-        self.browser.find_element_by_id("seeArticleBMW").click()
+        self.driver.find_element_by_id("seeArticleBMW").click()
         time.sleep(5)
-        self.assertEqual("No Rating", self.browser.find_element_by_id("articleRating").text)
-        self.browser.find_element_by_id("ratings").click()
-        self.browser.find_element_by_id("five").click()
-        self.browser.find_element_by_name("submitRatingButton").click()
+        self.assertEqual("No Rating", self.driver.find_element_by_id("articleRating").text)
+        self.driver.find_element_by_id("ratings").click()
+        self.driver.find_element_by_id("five").click()
+        self.driver.find_element_by_name("submitRatingButton").click()
         time.sleep(5)
-        self.browser.find_element_by_id("ratings").click()
-        self.browser.find_element_by_id("one").click()
-        self.browser.find_element_by_name("submitRatingButton").click()        
+        self.driver.find_element_by_id("ratings").click()
+        self.driver.find_element_by_id("one").click()
+        self.driver.find_element_by_name("submitRatingButton").click()        
         time.sleep(5)
-        self.assertEqual("3", self.browser.find_element_by_id("articleRating").text)
+        self.assertEqual("3", self.driver.find_element_by_id("articleRating").text)
