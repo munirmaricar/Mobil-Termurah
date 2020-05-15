@@ -5,11 +5,15 @@ from .apps import *
 from .views import *
 from .models import *
 from .forms import *
+from selenium import webdriver	
+from selenium.webdriver.common.keys import Keys	
+from selenium.webdriver.chrome.options import Options	
+import unittest	
+import time
 
+class UnitTesting (TestCase):
 
-    
-#-------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
-class tests (TestCase):
+    #-------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
     def testHomePageURL(self):
         response = Client().get('')
         self.assertEqual(response.status_code, 200)
@@ -151,3 +155,37 @@ class tests (TestCase):
     def testModelArticleReturnsString(self):
         newArticle = Article.objects.create(articleTitle='Rising Demand of Electric Vehicles', articleContent='This is because of environmental concerns')
         self.assertEqual(str(newArticle), newArticle.articleTitle)
+
+# Functional Testing
+class FunctionalTesting(unittest.TestCase):
+    def setUp(self):
+        chromeOptions = Options()
+        chromeOptions.add_argument('--no-sandbox')
+        chromeOptions.add_argument("--headless")
+        self.browser = webdriver.Chrome(options=chromeOptions)
+
+    def tearDown(self):
+        self.browser.quit()
+
+    def testIfArticleReviewsAreUpdatedSynchronously(self):
+        self.browser.get('http://127.0.0.1:8000/articles/')
+        self.browser.find_element_by_id("submitAnArticle").click()
+        time.sleep(5)
+        self.browser.find_element_by_id("articleTitle").send_keys("Test")
+        time.sleep(1)
+        self.browser.find_element_by_id("articleContent").send_keys("This is a test article.")
+        time.sleep(1)
+        self.browser.find_element_by_id("submitArticle").click()
+        time.sleep(5)
+        self.browser.find_element_by_id("seeArticleTest").click()
+        time.sleep(5)
+        self.assertEqual("No Rating", self.browser.find_element_by_id("articleRating").text)
+        self.browser.find_element_by_id("ratings").click()
+        self.browser.find_element_by_id("five").click()
+        self.browser.find_element_by_name("submitRatingButton").click()
+        time.sleep(5)
+        self.browser.find_element_by_id("ratings").click()
+        self.browser.find_element_by_id("one").click()
+        self.browser.find_element_by_name("submitRatingButton").click()        
+        time.sleep(5)
+        self.assertEqual("3", self.browser.find_element_by_id("articleRating").text)
