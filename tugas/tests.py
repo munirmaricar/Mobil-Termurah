@@ -5,8 +5,12 @@ from .apps import *
 from .views import *
 from .models import *
 from .forms import *
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+import time
 
-    
 # -------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
 class tests (TestCase):
 
@@ -196,12 +200,66 @@ class tests (TestCase):
         newUser.save()
         newCategory = Category.objects.create(categoryName='Luxury')
         newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png',carRating='4')
-        self.assertEqual(newCar.favourite.all().count(), 0)
         newCar.favourite.add(newUser)
         self.assertEqual(newCar.favourite.get(id=newUser.id), newUser)
+        newCar.favourite.remove(newUser)
+        self.assertEqual(newCar.favourite.all().count(), 0)
         response = Client().get('/cars/')
         response_content = response.content.decode('utf-8')
         self.assertIn("4", response_content)
         response = Client().get('/favoriteCarsPage/')
         response_content = response.content.decode('utf-8')
         self.assertIn("4", response_content)
+
+class GAFunctionalTest(LiveServerTestCase):
+    def setUp(self):
+        newUser = User.objects.create_user('groupk3', 'groupk3@mail.com', 'password')
+        newUser.last_name = 'ppw'
+        newUser.save()
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png',carRating='4')
+        super().setUp()
+        chrome_options = webdriver.ChromeOptions()
+        self.driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
+        # chrome_options = Options()
+        # chrome_options.add_argument('--dns-prefetch-disable')
+        # chrome_options.add_argument('--no-sandbox')
+        # chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('disable-gpu')
+        # self.driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
+        # super(GAFunctionalTest, self).setUp()
+
+    def tearDown(self):
+        self.driver.quit()
+        super().tearDown()
+
+    def testRegisterThenLogInThenFavoriteThisCar(self):
+        self.driver.get(self.live_server_url)
+        response_page = self.driver.page_source
+
+        time.sleep(3)
+        self.driver.find_element_by_name('LogIn').click()
+        time.sleep(5)
+
+        self.driver.find_element_by_name('username').send_keys('groupk3')
+        self.driver.find_element_by_name('password').send_keys('password')
+        time.sleep(3)
+        self.driver.find_element_by_name('loginbutton').click()
+        time.sleep(2)
+
+        self.driver.find_element_by_name('rentacarnow').click()
+        car = self.driver.find_elements_by_name('carname')
+        car[0].click()
+        time.sleep(2)
+        self.driver.find_element_by_name('favthiscar').click()
+        time.sleep(2)
+
+        response_page = self.driver.page_source
+        carname = self.driver.find_elements_by_id('carname')
+        self.assertIn('ALPHARD', carname[0].text)
+
+        time.sleep(2)
+        self.driver.find_element_by_name('remove').click()
+        time.sleep(2)
+        response_page = self.driver.page_source
+        self.assertIn('You have no favourite car.', response_page)

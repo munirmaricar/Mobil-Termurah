@@ -34,7 +34,7 @@
                         <form method='POST' action="{% url 'favouriteCar' car.id %}">
                             {% csrf_token %}
                             <input type='hidden'>
-                            <button type='submit' class="btn" style="background-color: #518384;
+                            <button type='submit' name="favthiscar" class="btn" style="background-color: #518384;
                             color: white;
                             border: none; border-radius: 5px;"> 💔 Remove from Favorite</button>
                         </form>
@@ -42,7 +42,7 @@
                         <form method='POST' action="{% url 'favouriteCar' car.id %}">
                             {% csrf_token %}
                             <input type='hidden'>
-                            <button type='submit' class="btn" style="background-color: #518384;
+                            <button type='submit' name="favthiscar" class="btn" style="background-color: #518384;
                             color: white;
                             border: none; border-radius: 5px;"> ♥️ Add to Favorite</button>
                         </form>

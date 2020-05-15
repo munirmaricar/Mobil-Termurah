@@ -40,7 +40,7 @@
                         	<form method='POST' action="{% url 'favouriteCar' car.id %}">
                            		{% csrf_token %}
                             	<input type='hidden'>
-								<button type='submit' class="btn" 
+								<button type='submit' name='remove' class="btn" 
 								style="background-color: #518384;
                             	color: white;
                             	border: none; border-radius: 5px; font-size: 10px;"> 💔 Remove</button>
