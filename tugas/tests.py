@@ -1,19 +1,19 @@
-from django.test import TestCase, Client
-from django.urls import resolve
+from django.test import TestCase, Client, LiveServerTestCase
+from django.urls import resolve, reverse
 from django.apps import apps
 from .apps import *
 from .views import *
 from .models import *
 from .forms import *
-from selenium import webdriver	
-from selenium.webdriver.common.keys import Keys	
-from selenium.webdriver.chrome.options import Options	
-import unittest	
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 import time
 
+# -------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
 class UnitTesting (TestCase):
 
-    #-------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
     def testHomePageURL(self):
         response = Client().get('')
         self.assertEqual(response.status_code, 200)
@@ -37,6 +37,21 @@ class UnitTesting (TestCase):
     def testAboutPageURL(self):
         response = Client().get('/about/')
         self.assertEqual(response.status_code, 200)
+
+    def testRegisterURL(self):
+        response = Client().get('/register/')
+        self.assertEqual(response.status_code,200)
+
+    def testSeeFavoriteCarPage(self):
+        response = response = Client().get('/favoriteCarsPage')
+        self.assertEqual(response.status_code,301)
+
+    def testFavoriteThisCar(self):
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
+        url = reverse('favouriteCar', kwargs={'pk': 1})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 302)
 
     # ------------------------------------------------------------------------------ TEMPLATE TESTING -------------------------------------------------------------------------
 
@@ -63,6 +78,14 @@ class UnitTesting (TestCase):
     def testAboutPageUsingTemplate(self):
         response = Client().get('/about/')
         self.assertTemplateUsed(response, 'pages/about.html')
+
+    def testRegisterURL(self):
+        response = Client().get('/register/')
+        self.assertTemplateUsed(response, 'pages/register.html')
+
+    def testSeeFavoriteCarPageTemplate(self):
+        response = Client().get('/favoriteCarsPage/')
+        self.assertTemplateUsed(response, 'pages/favoriteCarsPage.html')
 
     # ------------------------------------------------------------------------------ FUNCTION TESTING -------------------------------------------------------------------------
 
@@ -102,6 +125,16 @@ class UnitTesting (TestCase):
         found = resolve('/about/')
         self.assertEqual(found.func, about)
 
+    def testFavoriteCarPageFunction(self):
+        found = resolve('/favoriteCarsPage/')
+        self.assertEqual(found.func, favoriteCarsPage)
+
+    def testFavoriteThisCarFunction(self):
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png')
+        found = resolve('/favouriteCar/(?P<1>\d+)/$')
+        self.assertEqual(found.func, favouriteCar)
+
     # -------------------------------------------------------------------------------- APP TESTING ----------------------------------------------------------------------------
 
     def testApplication(self):
@@ -124,6 +157,11 @@ class UnitTesting (TestCase):
         response = Client().get('/about/')
         response_content = response.content.decode('utf-8')
         self.assertIn("About", response_content)
+
+    def testCarsPageContainsElement(self):
+        response = Client().get('/cars/')
+        response_content = response.content.decode('utf-8')
+        self.assertIn("Categories", response_content)
 
     # ------------------------------------------------------------------------------ MODEL TESTING --------------------------------------------------------------------------
 
@@ -156,16 +194,42 @@ class UnitTesting (TestCase):
         newArticle = Article.objects.create(articleTitle='Rising Demand of Electric Vehicles', articleContent='This is because of environmental concerns')
         self.assertEqual(str(newArticle), newArticle.articleTitle)
 
-# Functional Testing
-class FunctionalTesting(unittest.TestCase):
+    def testModelFavoriteThisCar(self): 
+        newUser = User.objects.create_user('groupk3', 'groupk3@mail.com', 'password')
+        newUser.last_name = 'ppw'
+        newUser.save()
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png',carRating='4')
+        newCar.favourite.add(newUser)
+        self.assertEqual(newCar.favourite.get(id=newUser.id), newUser)
+        newCar.favourite.remove(newUser)
+        self.assertEqual(newCar.favourite.all().count(), 0)
+        response = Client().get('/cars/')
+        response_content = response.content.decode('utf-8')
+        self.assertIn("4", response_content)
+        response = Client().get('/favoriteCarsPage/')
+        response_content = response.content.decode('utf-8')
+        self.assertIn("4", response_content)
+
+class FunctionalTesting(LiveServerTestCase):
     def setUp(self):
-        chromeOptions = Options()
-        chromeOptions.add_argument('--no-sandbox')
-        chromeOptions.add_argument("--headless")
-        self.browser = webdriver.Chrome(options=chromeOptions)
+        newUser = User.objects.create_user('groupk3', 'groupk3@mail.com', 'password')
+        newUser.last_name = 'ppw'
+        newUser.save()
+        newCategory = Category.objects.create(categoryName='Luxury')
+        newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png',carRating='4')
+        super().setUp()
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_argument('window-size=1920x1480')
+        self.driver = webdriver.Chrome(chrome_options=chrome_options, executable_path='chromedriver')
 
     def tearDown(self):
-        self.browser.quit()
+        self.driver.quit()
+        super().tearDown()
 
     def testIfArticleReviewsAreUpdatedSynchronously(self):
         self.browser.get('http://127.0.0.1:8000/articles/')
