@@ -233,11 +233,11 @@ class GAFunctionalTest(LiveServerTestCase):
         self.driver.quit()
         super().tearDown()
 
-    def testRegisterThenLogInThenFavoriteThisCar(self):
+    def testRegisterThenLogInThenFavoriteThisCarThenUnfavoriteThisCar(self):
         self.driver.get(self.live_server_url)
         response_page = self.driver.page_source
 
-        time.sleep(3)
+        time.sleep(10)
         self.driver.find_element_by_name('LogIn').click()
         time.sleep(5)
 
