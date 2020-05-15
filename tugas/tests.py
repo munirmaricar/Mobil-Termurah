@@ -198,10 +198,3 @@ class FunctionalTesting(LiveServerTestCase):
         self.driver.find_element_by_name("submitRatingButton").click()        
         time.sleep(5)
         self.assertEqual("3", self.driver.find_element_by_id("articleRating").text)
-
-        
-
-
-
-
-
