@@ -250,6 +250,17 @@ class GAFunctionalTest(LiveServerTestCase):
         time.sleep(2)
         self.driver.find_element_by_name('RegisterButton').click()
 
+        self.driver.find_element_by_name('Register').click()
+        
+        self.driver.find_element_by_name('username').send_keys('groupk3account')
+        self.driver.find_element_by_name('first_name').send_keys('group')
+        self.driver.find_element_by_name('last_name').send_keys('k3ppw')
+        self.driver.find_element_by_name('email').send_keys('groupk3mail@mail.com')
+        self.driver.find_element_by_name('password1').send_keys('password123')
+        self.driver.find_element_by_name('password2').send_keys('password123')
+        time.sleep(2)
+        self.driver.find_element_by_name('RegisterButton').click()
+
         self.driver.find_element_by_name('username').send_keys('groupk3account')
         self.driver.find_element_by_name('first_name').send_keys('group')
         self.driver.find_element_by_name('last_name').send_keys('k3ppw')
