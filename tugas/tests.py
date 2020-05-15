@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 import time
 
 # -------------------------------------------------------------------------------- URL TESTING ----------------------------------------------------------------------------
@@ -220,6 +221,7 @@ class GAFunctionalTest(LiveServerTestCase):
         newCar = Car.objects.create(carName='Alphard', carCategory=newCategory, carYear='2020', carCity='Jakarta', carPrice='Rp. 1,000,000,000', carDescription='Spacious Luxury Vehicle', carImage='static/img/Car.png',carRating='4')
         super().setUp()
         chrome_options = webdriver.ChromeOptions()
+        # self.driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
@@ -231,33 +233,119 @@ class GAFunctionalTest(LiveServerTestCase):
         self.driver.quit()
         super().tearDown()
 
-    def testRegisterThenLogInThenFavoriteThisCarThenUnfavoriteThisCar(self):
+    # def testRegisterThenLogInThenFavoriteThisCarThenUnfavoriteThisCar(self):
+    #     self.driver.get(self.live_server_url)
+    #     response_page = self.driver.page_source
+
+    #     time.sleep(5)
+    #     self.driver.find_element_by_name('Register').click()
+    #     time.sleep(2)
+
+    #     self.driver.find_element_by_name('username').send_keys('groupk3account')
+    #     self.driver.find_element_by_name('first_name').send_keys('group')
+    #     self.driver.find_element_by_name('last_name').send_keys('k3ppw')
+    #     self.driver.find_element_by_name('email').send_keys('groupk3mail@mail.com')
+    #     self.driver.find_element_by_name('password1').send_keys('password123')
+    #     self.driver.find_element_by_name('password2').send_keys('password123')
+    #     time.sleep(2)
+    #     self.driver.find_element_by_name('RegisterButton').click()
+
+    #     self.driver.find_element_by_name('username').send_keys('groupk3account')
+    #     self.driver.find_element_by_name('first_name').send_keys('group')
+    #     self.driver.find_element_by_name('last_name').send_keys('k3ppw')
+    #     self.driver.find_element_by_name('email').send_keys('groupk3mail@mail.com')
+    #     self.driver.find_element_by_name('password1').send_keys('123Adadeh')
+    #     self.driver.find_element_by_name('password2').send_keys('123Adadeh')
+    #     time.sleep(2)
+    #     self.driver.find_element_by_name('RegisterButton').click()
+
+    #     time.sleep(5)
+    #     self.driver.find_element_by_name('LogIn').click()
+    #     time.sleep(5)
+
+    #     self.driver.find_element_by_name('username').send_keys('groupk3')
+    #     self.driver.find_element_by_name('password').send_keys('password')
+    #     time.sleep(3)
+    #     self.driver.find_element_by_name('loginbutton').click()
+    #     time.sleep(2)
+
+    #     self.driver.find_element_by_name('rentacarnow').click()
+    #     car = self.driver.find_elements_by_name('carname')
+    #     car[0].click()
+    #     time.sleep(2)
+    #     self.driver.find_element_by_name('favthiscar').click()
+    #     time.sleep(2)
+
+    #     response_page = self.driver.page_source
+    #     carname = self.driver.find_elements_by_id('carname')
+    #     self.assertIn('ALPHARD', carname[0].text)
+
+    #     time.sleep(2)
+    #     self.driver.find_element_by_name('remove').click()
+    #     time.sleep(2)
+    #     response_page = self.driver.page_source
+    #     self.assertIn('You have no favourite car.', response_page)
+
+    # def testFindCarWithSearchBar(self):
+    #     self.driver.get(self.live_server_url)
+    #     response_page = self.driver.page_source
+
+    #     time.sleep(5)
+    #     carname = 'Alphard'
+    #     for char in carname:
+    #         self.driver.find_element_by_name('carName').send_keys(char)
+    #         time.sleep(1)
+    #     self.driver.find_element_by_name('carName').send_keys(Keys.RETURN)
+    #     time.sleep(5)
+
+    #     response_page = self.driver.page_source
+    #     time.sleep(5)
+    #     carname = self.driver.find_elements_by_id('carname')
+    #     self.assertIn('ALPHARD', carname[0].text)
+
+    # def testSubmitAnArticleThenSeeArticle(self):
+    #     self.driver.get(self.live_server_url)
+    #     response_page = self.driver.page_source
+
+    #     time.sleep(5)
+    #     self.driver.find_element_by_name('Article').click()
+    #     time.sleep(2)
+
+    #     self.driver.find_element_by_name('submitarticlebtn').click()
+
+    #     self.driver.find_element_by_name('articleTitle').send_keys('MobilTermurah Article')
+    #     self.driver.find_element_by_name('articleContent').send_keys('We have various cars for rent')
+    #     time.sleep(2)
+    #     self.driver.find_element_by_name('submitarticle').click()
+
+    #     response_page = self.driver.page_source
+    #     time.sleep(2)
+    #     articleTitle = self.driver.find_elements_by_id('articleTitle')
+    #     self.assertIn('MobilTermurah Article', articleTitle[0].text)
+
+    #     self.driver.find_element_by_name('articleTitle').click()
+    #     response_page = self.driver.page_source
+    #     self.assertIn('We have various cars for rent', response_page)
+
+    def testRentYourCarNow(self):
         self.driver.get(self.live_server_url)
         response_page = self.driver.page_source
 
         time.sleep(5)
-        self.driver.find_element_by_name('LogIn').click()
-        time.sleep(5)
-
-        self.driver.find_element_by_name('username').send_keys('groupk3')
-        self.driver.find_element_by_name('password').send_keys('password')
-        time.sleep(3)
-        self.driver.find_element_by_name('loginbutton').click()
+        self.driver.find_element_by_name('rentyourcar').click()
         time.sleep(2)
 
-        self.driver.find_element_by_name('rentacarnow').click()
-        car = self.driver.find_elements_by_name('carname')
-        car[0].click()
+        self.driver.find_element_by_id('nameinput').send_keys('Mercedez Benz')
+        self.driver.find_element_by_name('carCategory').click()
+        self.driver.find_element_by_name('categoryopt').click()
+        self.driver.find_element_by_name('carYear').send_keys('2020')
+        self.driver.find_element_by_name('carCity').send_keys('Jakarta')
+        self.driver.find_element_by_name('carDescription').send_keys('A car')
+        self.driver.find_element_by_name('carPrice').send_keys('600000')
+        self.driver.find_element_by_name('carImage').send_keys('static/img/car.png')
         time.sleep(2)
-        self.driver.find_element_by_name('favthiscar').click()
-        time.sleep(2)
+        self.driver.find_element_by_name('rentmycar').click()
 
-        response_page = self.driver.page_source
-        carname = self.driver.find_elements_by_id('carname')
-        self.assertIn('ALPHARD', carname[0].text)
-
+        carname = self.driver.find_elements_by_name('carname')
         time.sleep(2)
-        self.driver.find_element_by_name('remove').click()
-        time.sleep(2)
-        response_page = self.driver.page_source
-        self.assertIn('You have no favourite car.', response_page)
+        self.assertIn('Sienta', carname)

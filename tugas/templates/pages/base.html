@@ -26,14 +26,14 @@
               <a class="nav-link" href="{%url 'cars'%}"">Cars</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{%url 'articles'%}">Article</a>
+                <a class="nav-link" name="Article" href="{%url 'articles'%}">Article</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{%url 'about'%}">About</a>
               </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'findCar' %}">{% csrf_token %}
-            <input name="carName" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input name="carName" id="searchbar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           </form>
           <ul class="navbar-nav pull-left">
               {% if user.is_authenticated %}
@@ -57,7 +57,7 @@
                 <a class="nav-link register" name="LogIn" href="{%url 'login'%}">Login</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link register" href="{%url 'register'%}">Register</a>
+                  <a class="nav-link register" name="Register" href="{%url 'register'%}">Register</a>
               </li>
               {% endif %}
           </ul>

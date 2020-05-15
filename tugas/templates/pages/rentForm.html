@@ -6,12 +6,12 @@
 	<form method="POST" action="{% url 'sendRentForm' %}" enctype="multipart/form-data">{% csrf_token %}
 		<div class="form-group">
 			<label for="">Name</label>
-			<input type='text' name='carName' class="form-control">
+			<input id='nameinput' type='text' name='carName' class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="">Category</label>
 			<select name='carCategory' class="form-control">{% for category in categories %}
-				<option value="{{category.categoryName}}">{{category.categoryName}}</option>
+				<option name='categoryopt' value="{{category.categoryName}}">{{category.categoryName}}</option>
 			{% endfor %}
 			</select>
 		</div>
@@ -36,7 +36,7 @@
 			<br>
 			<input type="file" name="carImage">
 		</div>
-		<input id="sub" type='submit' value='Submit' class="btn btn-large btn-primary" style="background-color: #518384;">					
+		<input id="sub" name='rentmycar' type='submit' value='Submit' class="btn btn-large btn-primary" style="background-color: #518384;">					
 		</form>
 </div>
 {% endblock %}
